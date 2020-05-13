@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmls:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -43,9 +43,13 @@
             helpInit();
             $("#nameHelper").text("이름을 확인하세요");
             $("#memberName").focus();
-         }else if($("#memberPhone").val().length === 0){
+         }else if($("#memberAddr").val().length === 0){
+             helpInit();
+             $("#addrHelper").text("주소를 확인하세요");
+             $("#memberAddr").focus();
+         } else if($("#memberPhone").val().length === 0){
             helpInit();
-            $("#phoneHelper").text("핸드폰 이름을 확인하세요");
+            $("#phoneHelper").text("핸드폰 번호를 확인하세요");
             $("#memberPhone").focus();
          }else if($("#memberAddr").val().length === 0){
             helpInit();
@@ -59,46 +63,64 @@
             $("#myForm").submit();
          }
       });
-   });
+      
+      $('#idBtn').click(function() {
+  		$('#idForm').submit();
+  	  });
+});
 </script>
 </head>
 <body>
 <div class="container">
+
+
+<div class="card">
 <div align="center">
 	<h1>회원가입</h1>
 </div>	
+	
+	<form id="idForm" method="post" action="/checkMemberId">
+		<div>
+			아이디 중복 확인 : <input type="text" name="memberIdCheck" id="memberIdCheck">
+			<button id="idBtn" type="button">중복체크</button>
+			<span th:text="${msg}"></span>
+		</div>
+	</form>
+	
 	<form action="/addMember" method="post" id="myform">
 		<div>
-			아이디 : <input type="text" name="memberId" id="memberId" class="form-control">
+			아이디 : <input type="text" name="memberId" id="memberId" class="form-control"  style="width: 500px"
+					readonly="readonly" th:value="${confirmMemberId}">
 			<span id="idHelper"></span>
 		</div>
 		<div>
-			비밀번호 : <input type="text" name="memberPw" id="memberPw" class="form-control">
+			비밀번호 : <input type="text" name="memberPw" id="memberPw" class="form-control" style="width: 500px">
 			<span id="pwHelper"></span>
 		</div>
 		<div>
-			비밀번호 확인 : <input type="text" id="memberPw2" class="form-control">
+			비밀번호 확인 : <input type="text" id="memberPw2" class="form-control" style="width: 500px">
 		</div>
 		<div>
-			사용자이름 : <input type="text" name="memberName" id="memberName" class="form-control">
+			사용자이름 : <input type="text" name="memberName" id="memberName" class="form-control" style="width: 500px">
 			<span id="nameHelper"></span>
 		</div>
 		<div>
-			주소 : <input type="text" name="memberAddr" id="memberAddr" class="form-control">
+			주소 : <input type="text" name="memberAddr" id="memberAddr" class="form-control style="width: 500px"">
 			<span id="addrHelper"></span>
 		</div>
 		<div>
-			전화번호 : <input type="text" name="memberPhone" id="memberPhone" class="form-control">
+			전화번호 : <input type="text" name="memberPhone" id="memberPhone" class="form-control" style="width: 500px">
 			<span id="phoneHelper"></span>
 		</div>
 		<div>
-			이메일 : <input type="text" name="memberEmail" id="memberEmail" class="form-control">
+			이메일 : <input type="text" name="memberEmail" id="memberEmail" class="form-control" style="width: 500px">
 			<span id="emailHelper"></span>
 		</div>
 	</form>
 		<div align="center">
 			<button id="btn" class="btn btn-outline-primary">가입</button>
 		</div>
+</div>	
 </div>	
 </body>
 </html>

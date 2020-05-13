@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmls:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" style="margin-top: 200px;">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -24,20 +24,30 @@ $(document).ready(function () {
 </script>
 </head>
 <body>
+<div class="container">
+
+
+<div class="card">
+<div align="center">
 	<h1>로그인</h1>
 	<form id="loginForm" action="/login" method="post">
 		<div>
 			member_id :
-			<input type="text" id="memberId" name="memberId">
+			<input type="text" id="memberId" name="memberId" class="form-control" style="width: 500px">
 		</div>
 		<div>
 			member_pw :
-			<input type="text" id="memberPw" name="memberPw">
+			<input type="text" id="memberPw" name="memberPw" class="form-control" style="width: 500px">
 		</div>
 		<div>
-			<button id="btn" type="button">로그인</button>
+			<span></span>
+		</div>
+		<div>
+			<button id="btn" type="button" class="btn btn-outline-primary">로그인</button>
 		</div>
 	</form>
-		
+</div>
+</div>
+</div>		
 </body>
 </html>
