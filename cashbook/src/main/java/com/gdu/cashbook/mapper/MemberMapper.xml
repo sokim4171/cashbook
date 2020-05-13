@@ -5,8 +5,20 @@
 <mapper namespace="com.gdu.cashbook.mapper.MemberMapper">
   <!-- 추가 -->
   <insert id="insertMember" parameterType="com.gdu.cashbook.vo.Member">
-    insert into 
-    member(member_id,member_pw,member_name,member_addr,member_phone,member_email)
-    VALUES(#{memberId},#{memberPw},#{memberName},#{memberAddr},#{memberPhone},#{memberEmail})
+    insert into member(
+    	member_id,
+    	member_pw,
+    	member_name,
+    	member_addr,
+    	member_phone,
+    	member_email
+    ) VALUES(
+    	#{memberId},
+    	#{memberPw},
+    	#{memberName},
+    	#{memberAddr},
+    	#{memberPhone},
+    	#{memberEmail}
+    )
   </insert>
 </mapper>
