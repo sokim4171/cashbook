@@ -24,44 +24,37 @@
       $("#addrHelper").text("");
       $("#emailHelper").text("");
    }
+   
    $(document).ready(function(){
       $("#btn").click(function(){
-         
          if($("#memberId").val().length < 4){
             helpInit();
             $("#idHelper").text("id를 4자이상");
             $("#memberId").focus();
-            
          }else if($("#memberPw").val().length < 4){
             helpInit();
             $("#pwHelper").text("PW는 4글자 이상");
             $("#memberPw").focus();
-            
          }else if($("#memberPw").val() != $("#memberPw2").val()){
             helpInit();
             $("#pwHelper").text("PW를 확인하세요");
             $("#memberPw").focus();
-            
          }else if($("#memberName").val().length === 0){
             helpInit();
             $("#nameHelper").text("이름을 확인하세요");
             $("#memberName").focus();
-         
          }else if($("#memberPhone").val().length === 0){
             helpInit();
             $("#phoneHelper").text("핸드폰 이름을 확인하세요");
             $("#memberPhone").focus();
-            
          }else if($("#memberAddr").val().length === 0){
             helpInit();
             $("#addrHelper").text("주소를 확인하세요");
             $("#memberAddr").focus();
-            
          }else if($("#memberEmail").val().length === 0){
             helpInit();
             $("#emailHelper").text("이메일를 확인하세요");
             $("#memberEmail").focus();
-            
          }else{
             $("#myForm").submit();
          }
@@ -102,11 +95,10 @@
 			이메일 : <input type="text" name="memberEmail" id="memberEmail" class="form-control">
 			<span id="emailHelper"></span>
 		</div>
+	</form>
 		<div align="center">
 			<button id="btn" class="btn btn-outline-primary">가입</button>
 		</div>
-	</form>
-		
 </div>	
 </body>
 </html>
