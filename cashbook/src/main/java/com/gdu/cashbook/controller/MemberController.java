@@ -18,7 +18,20 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	//memberInfo 뷰
+	@GetMapping("/memberInfo")
+	public String memberInfo(HttpSession session, Model model) {
+		//로그인 안했을때 
+		if(session.getAttribute("loginMember")==null){ //로그인 해있으면 못하게 막기 
+			return "redirect:/index";
+		}
+		Member member=memberService.getMemberOne((LoginMember)(session.getAttribute("loginMember")));
+		System.out.println(member);
+		model.addAttribute("member",member);
+		return "memberInfo";
+	}
 	
+	//중복 체크
 	@PostMapping("/checkMemberId")
 	public String checkMemberId(Model model,@RequestParam("memberIdCheck") String memberIdCheck,HttpSession session) {
 		//로그인 중일때
@@ -40,7 +53,7 @@ public class MemberController {
 	}
 	
 	
-	
+	//로그인 화면
 	@GetMapping("/login") 
 	public String Login(HttpSession session) {
 		//로그인 중일때
@@ -49,6 +62,7 @@ public class MemberController {
 		}
 		return "login";
 	}
+	//로그인 액션
 	@PostMapping("/login")
 	public String Login(LoginMember loginMember,HttpSession session,Model model) {
 		//로그인 중일때
@@ -63,13 +77,13 @@ public class MemberController {
 			return "redirect:/login";
 		} else { //login 성공
 			session.setAttribute("loginMember", returnLoginMember);
-			return "redirect:/index";
+			return "redirect:/home";
 		}
 	}
 	
 	
 	
-	
+	//로그아웃 기능
 	@GetMapping("/logout")
 	public String Logout(HttpSession session) {
 		//로그인이 아닐때
@@ -83,7 +97,7 @@ public class MemberController {
 	
 	
 	
-	
+	//회원가입 폼
 	@GetMapping("/addMember")
 	public String addMember(HttpSession session) {
 		//로그인 때
@@ -92,6 +106,7 @@ public class MemberController {
 		}
 		return "addMember";
 	}
+	//회원가입 액션
 	@PostMapping("/addMember")
 	public String addMember(Member member,HttpSession session) { 
 		//로그인 때
