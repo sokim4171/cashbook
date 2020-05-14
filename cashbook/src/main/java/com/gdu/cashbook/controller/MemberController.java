@@ -1,6 +1,7 @@
 package com.gdu.cashbook.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,54 @@ import com.gdu.cashbook.vo.Member;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+	
+	//회원 정보 수정 뷰
+	@GetMapping("/modifyMember")
+	public String modifyMember(HttpSession session,Member member,Model model) {
+		//로그인 안했을때 
+		if(session.getAttribute("loginMember")==null){ //로그인 해있으면 못하게 막기 
+			return "redirect:/index";
+		}
+		Member member1=memberService.getMemberOne((LoginMember)(session.getAttribute("loginMember")));
+		System.out.println(member1);
+		model.addAttribute("member",member1);
+		return "modifyMember";
+	}
+	
+	//회원 정보 
+	@PostMapping("/modifyMember")
+	public String modifyMember(Member member,HttpSession session) {
+		//로그인 안했을때 
+		if(session.getAttribute("loginMember")==null){ //로그인 해있으면 못하게 막기 
+			return "redirect:/index";
+		}
+		memberService.modifyMember(member);
+		return "redirect:/memberInfo";
+	}
+	
+	//회원 탈퇴 뷰
+	@GetMapping("/removeMember")
+	public String removeMember(HttpSession session) {
+		if(session.getAttribute("loginMember") == null) {
+			return "redirect:/index";
+		}
+		return "removeMember"; // input type="password" name="memberPw"
+	}
+	//회원탈퇴 액셕
+	@PostMapping("/removeMember")
+	public String removeMember(HttpSession session, @RequestParam("memberPw") String memberPw) {
+		if(session.getAttribute("loginMember") == null) {
+			return "redirect:/index";
+		}
+
+		LoginMember loginMember = (LoginMember)(session.getAttribute("loginMember"));
+		loginMember.setMemberPw(memberPw);
+		memberService.removeMember(loginMember);
+		session.invalidate();
+
+		return "redirect:/index";
+	}
+	
 	
 	//memberInfo 뷰
 	@GetMapping("/memberInfo")
@@ -53,6 +102,34 @@ public class MemberController {
 	}
 	
 	
+	
+	
+	//회원가입 폼
+	@GetMapping("/addMember")
+	public String addMember(HttpSession session) {
+		//로그인 때
+		if(session.getAttribute("loginMember")!=null){
+			return "redirect:/index";
+		}
+		return "addMember";
+	}
+	//회원가입 액션
+	@PostMapping("/addMember")
+	public String addMember(Member member,HttpSession session) { 
+		//로그인 때
+		if(session.getAttribute("loginMember")!=null){ //이미 로그인이 되어있으면  addMemer가 할 필요가 없으니 인덱스로 돌아가기 
+			return "redirect:/index";
+		}
+		System.out.println(member.toString());
+		memberService.addMember(member);
+		return "redirect:/index";
+	}
+
+	
+	
+	
+	
+	
 	//로그인 화면
 	@GetMapping("/login") 
 	public String Login(HttpSession session) {
@@ -80,9 +157,6 @@ public class MemberController {
 			return "redirect:/home";
 		}
 	}
-	
-	
-	
 	//로그아웃 기능
 	@GetMapping("/logout")
 	public String Logout(HttpSession session) {
@@ -97,26 +171,6 @@ public class MemberController {
 	
 	
 	
-	//회원가입 폼
-	@GetMapping("/addMember")
-	public String addMember(HttpSession session) {
-		//로그인 때
-		if(session.getAttribute("loginMember")!=null){
-			return "redirect:/index";
-		}
-		return "addMember";
-	}
-	//회원가입 액션
-	@PostMapping("/addMember")
-	public String addMember(Member member,HttpSession session) { 
-		//로그인 때
-		if(session.getAttribute("loginMember")!=null){ //이미 로그인이 되어있으면  addMemer가 할 필요가 없으니 인덱스로 돌아가기 
-			return "redirect:/index";
-		}
-		System.out.println(member.toString());
-		memberService.addMember(member);
-		return "redirect:/addMember";
-	}
 
 	
 	

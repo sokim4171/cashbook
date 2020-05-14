@@ -15,36 +15,26 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function () {
+	$('#btn').click(function () {
+		$('#removeForm').submit();
+	});
+});
+</script>
 </head>
 <body>
-	<h1> 회원정보 </h1>
+	<h1>회원 탈퇴</h1>
+	<!-- 사이드 메뉴 -->
 	<div th:include="/include/menu::sidemenu"></div>
-	<div>
-		<a th:href="@{/removeMember}">회원 탈퇴</a>
-		<a th:href="@{/modifyMember}">회원 수정</a>
-	</div>
-	<table class="table">
-		<tr>
-			<td>아이디</td>
-			<td th:text="${member.memberId}"></td>
-		</tr>
-		<tr>
-			<td>이름</td>
-			<td th:text="${member.memberName}"></td>
-		</tr>
-		<tr>
-			<td>주소</td>
-			<td th:text="${member.memberAddr}"></td>
-		</tr>
-		<tr>
-			<td>전화번호</td>
-			<td th:text="${member.memberPhone}"></td>
-		</tr>
-		<tr>
-			<td>이메일</td>
-			<td th:text="${member.memberEmail}"></td>
-		</tr>
-	</table>
-
+	<form action="/removeMember" method="post" id="removeForm">
+		<div>
+			비밀번호 입력 :
+			<input type="text" id="memberPw" name="memberPw">
+		</div>
+		<div>
+			<button type="button" id="btn">탈퇴</button>
+		</div>
+	</form>
 </body>
 </html>

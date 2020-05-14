@@ -17,8 +17,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script>
 $(document).ready(function () {
-	$('#btn').button().click(function () {
-		$('#loginForm').submit();
+	$('#btn').click(function () {
+		if($('#memberId').val().length==0 || $('#memberPw').val().length==0){
+			$('#warning').text("아이디와 비밀번호를 입력하세요.");
+		}else{
+			$('#loginForm').submit();
+		}
 	});
 });
 </script>
@@ -40,8 +44,13 @@ $(document).ready(function () {
 			<input type="text" id="memberPw" name="memberPw" class="form-control" style="width: 500px">
 		</div>
 		<div>
-			<span></span>
+			<span id="warning"></span>
 		</div>
+		<div>
+			<a href="">아이디가 기억나지 않아요</a> <!-- 이메일 입력: 이메일에 id보냄 -->
+			<a href="">비밀번호가 기억나지 않아요</a> <!-- 아이디,이메일 :  이메일로 관리자가 변경한 비밀번호를 보냄  -->
+		</div>
+		
 		<div>
 			<button id="btn" type="button" class="btn btn-outline-primary">로그인</button>
 		</div>

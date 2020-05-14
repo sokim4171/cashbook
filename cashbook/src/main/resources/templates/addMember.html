@@ -16,63 +16,67 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script>
-   let helpInit = function(){
-      $("#idHelper").text("");
-      $("#pwHelper").text("");
-      $("#nameHelper").text("");
-      $("#phoneHelper").text("");
-      $("#addrHelper").text("");
-      $("#emailHelper").text("");
-   }
-   
-   $(document).ready(function(){
-      $("#btn").click(function(){
-         if($("#memberId").val().length < 4){
-            helpInit();
-            $("#idHelper").text("id를 4자이상");
-            $("#memberId").focus();
-         }else if($("#memberPw").val().length < 4){
-            helpInit();
-            $("#pwHelper").text("PW는 4글자 이상");
-            $("#memberPw").focus();
-         }else if($("#memberPw").val() != $("#memberPw2").val()){
-            helpInit();
-            $("#pwHelper").text("PW를 확인하세요");
-            $("#memberPw").focus();
-         }else if($("#memberName").val().length === 0){
-            helpInit();
-            $("#nameHelper").text("이름을 확인하세요");
-            $("#memberName").focus();
-         }else if($("#memberAddr").val().length === 0){
-             helpInit();
-             $("#addrHelper").text("주소를 확인하세요");
-             $("#memberAddr").focus();
-         } else if($("#memberPhone").val().length === 0){
-            helpInit();
-            $("#phoneHelper").text("핸드폰 번호를 확인하세요");
-            $("#memberPhone").focus();
-         }else if($("#memberAddr").val().length === 0){
-            helpInit();
-            $("#addrHelper").text("주소를 확인하세요");
-            $("#memberAddr").focus();
-         }else if($("#memberEmail").val().length === 0){
-            helpInit();
-            $("#emailHelper").text("이메일를 확인하세요");
-            $("#memberEmail").focus();
-         }else{
-            $("#myForm").submit();
-         }
-      });
-      
-      $('#idBtn').click(function() {
-    	  if($("#memberIdCheck").val().length < 4){
-              $("#checkHelper").text("id를 4자이상");
-              $("#memberIdCheck").focus();
-          }else {
-  			  $('#idForm').submit();
-		  }
-  	  });
-});
+
+	let helpInit = function() {
+		$("#idHelper").text("");
+		$("#pwHelper").text("");
+		$("#nameHelper").text("");
+		$("#phoneHelper").text("");
+		$("#addrHelper").text("");
+		$("#emailHelper").text("");
+	}
+
+	$(document).ready(function() {
+		$('#idBtn').click(function() {
+			if ($("#memberIdCheck").val().length < 4) {
+				$("#checkHelper").text("id를 4자이상");
+				$("#memberIdCheck").focus();
+			} else {
+				$('#idForm').submit();
+			}
+		});
+		
+		$("#btn").click(function() {
+			console.log("click");
+			if ($("#memberId").val().length < 4) {
+				helpInit();
+				$("#idHelper").text("id를 4자이상");
+				$("#memberId").focus();
+			} else if ($("#memberPw").val().length < 4) {
+				helpInit();
+				$("#pwHelper").text("PW는 4글자 이상");
+				$("#memberPw").focus();
+			} else if ($("#memberPw").val() != $("#memberPw2").val()) {
+				helpInit();
+				$("#pwHelper").text("PW를 확인하세요");
+				$("#memberPw").focus();
+			} else if ($("#memberName").val().length === 0) {
+				helpInit();
+				$("#nameHelper").text("이름을 확인하세요");
+				$("#memberName").focus();
+			} else if ($("#memberAddr").val().length === 0) {
+				helpInit();
+				$("#addrHelper").text("주소를 확인하세요");
+				$("#memberAddr").focus();
+			} else if ($("#memberPhone").val().length === 0) {
+				helpInit();
+				$("#phoneHelper").text("핸드폰 번호를 확인하세요");
+				$("#memberPhone").focus();
+			} else if ($("#memberAddr").val().length === 0) {
+				helpInit();
+				$("#addrHelper").text("주소를 확인하세요");
+				$("#memberAddr").focus();
+			} else if ($("#memberEmail").val().length === 0) {
+				helpInit();
+				$("#emailHelper").text("이메일를 확인하세요");
+				$("#memberEmail").focus();
+			} else {
+				$("#myform").submit();
+			}
+		});
+
+		
+	});
 </script>
 </head>
 <body>
@@ -85,7 +89,7 @@
 </div>	
 	
 	<form id="idForm" method="post" action="/checkMemberId">
-		<div>
+		<div align="center">
 			아이디 중복 확인 : <input type="text" name="memberIdCheck" id="memberIdCheck">
 			<span id="checkHelper"></span>
 			<button id="idBtn" type="button">중복체크</button>
@@ -94,6 +98,7 @@
 	</form>
 	
 	<form action="/addMember" method="post" id="myform">
+	<div align="center">
 		<div>
 			아이디 : <input type="text" name="memberId" id="memberId" class="form-control"  style="width: 500px"
 					readonly="readonly" th:value="${confirmMemberId}">
@@ -111,7 +116,7 @@
 			<span id="nameHelper"></span>
 		</div>
 		<div>
-			주소 : <input type="text" name="memberAddr" id="memberAddr" class="form-control style="width: 500px"">
+			주소 : <input type="text" name="memberAddr" id="memberAddr" class="form-control" style="width: 500px">
 			<span id="addrHelper"></span>
 		</div>
 		<div>
@@ -122,10 +127,9 @@
 			이메일 : <input type="text" name="memberEmail" id="memberEmail" class="form-control" style="width: 500px">
 			<span id="emailHelper"></span>
 		</div>
+			<button type="button" id="btn" class="btn btn-outline-primary">가입</button>
+	</div>	
 	</form>
-		<div align="center">
-			<button id="btn" class="btn btn-outline-primary">가입</button>
-		</div>
 </div>	
 </div>	
 </body>
