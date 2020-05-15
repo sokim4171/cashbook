@@ -19,6 +19,25 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	//아이디 찾기용
+	@GetMapping("/findMemberId")
+	public String findMemberId(HttpSession session) {
+		if(session.getAttribute("loginMember")!=null){ 
+			return "redirect:/index";
+		}
+		return "findMemberId";
+	}
+	@PostMapping("/findMemberId")
+	public String findMemberId(HttpSession session,Model model,Member member) {
+		if(session.getAttribute("loginMember")!=null){ 
+			return "redirect:/index";
+		}
+		String memberIdPart=memberService.getMemberIdByMember(member);
+		System.out.println(memberIdPart+"<--memberIdPart");
+		model.addAttribute("memberIdPart", memberIdPart);
+		return "memberIdView";
+	}
+	
 	//회원 정보 수정 뷰
 	@GetMapping("/modifyMember")
 	public String modifyMember(HttpSession session,Member member,Model model) {

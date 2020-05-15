@@ -18,6 +18,12 @@ public class MemberService {
 	@Autowired 
 	private MemberidMapper memberidMapper;
 	
+	//아이디 찾기용
+	public String getMemberIdByMember(Member member) {
+		return memberMapper.selectMemberIdByMember(member);
+	}
+	
+	
 	//회원 정보 수정
 	public int modifyMember(Member member) {
 		return memberMapper.updateMember(member);
