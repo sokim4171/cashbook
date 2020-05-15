@@ -4,6 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.cashbook.mapper.MemberMapper">
   
+  <!-- 비밀먼호 변경 
+		1. 사용자가 입력한  아이디와 이메일 일치하면 업데이트
+		2. 사용자의 변경된 비밀번호를 메일로 전송
+   -->
+  <!-- 사용자가 입력한  아이디와 이메일 일치하면 업데이트 -->
+  <update id="updateMemberPw"
+  		parameterType="com.gdu.cashbook.vo.LoginMember">
+  	update member 
+  	set	member_pw=PASSWORD(#{memberPw})
+  	where member_id=#{memberId}
+  	And member_email=#{memberEmail}
+  </update>
+  
+  
   <!-- 아이디 찾기용 -->
   <select id="selectMemberIdByMember"
   		parameterType="com.gdu.cashbook.vo.Member"
@@ -18,7 +32,7 @@
    
   
   <!-- 회원 정보 수정 -->
-  <update id="updateMember" parameterType="com.gdu.cashbook.vo.Member">
+  <update id="updateMember" parameterType="com.gdu.cashbook.vo.LoginMember">
   	UPDATE member
   	SET member_name=#{memberName}, 
   		member_addr=#{memberAddr}, 
@@ -48,7 +62,8 @@
     	member_name memberName,
     	member_addr memberAddr,
     	member_phone memberPhone,
-    	member_email memberEmail
+    	member_email memberEmail,
+    	member_pic memberPic
   	FROM member
   	WHERE member_id=#{memberId}
   </select>

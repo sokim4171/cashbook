@@ -17,12 +17,24 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script>
 $(document).ready(function () {
+	let helpInit = function() {
+		$("#pwHelper1").text("");
+		$("#pwHelper2").text("");
+	}
+	
+	
+	
 	$('#updateBtn').click(function () {
-		if($('#memberPw1').val().length===0)){
+		if($('#memberPw1').val().length===0){
+			helpInit();
 			$('#pwHelper1').text("비밀번호를 입력하세요");
-		} else if($('#memberPw2').val().length==="0")){
+			console.log("!");
+		} else if($('#memberPw2').val().length===0){
+			helpInit();
 			$('#pwHelper2').text("비밀번호 확인을 입력하세요");
-		} else if($('#memberPw1')==$('#memberPw2')){
+			console.log("@");
+		} else if($('#memberPw1').val()==$('#memberPw2').val()){
+			console.log("#");
 			$('#updateForm').submit();
 		} 
 	});

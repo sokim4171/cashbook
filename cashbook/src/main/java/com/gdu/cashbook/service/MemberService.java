@@ -1,6 +1,10 @@
 package com.gdu.cashbook.service;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +21,30 @@ public class MemberService {
 	private MemberMapper memberMapper;
 	@Autowired 
 	private MemberidMapper memberidMapper;
+	@Autowired
+	private JavaMailSender javaMailSender;
+	
+	//비밀번호 변경
+	public int getMemberPw(Member member) {
+		UUID uuid=UUID.randomUUID();
+		String memberPw=uuid.toString().substring(0, 8);
+		member.setMemberPw(memberPw);
+		int row= memberMapper.updateMemberPw(member);
+		if(row==1) {
+			System.out.println(memberPw+"<--updateMemberPw");
+			//메일로 랜덤 패스워드 전송
+			//메일 객체 
+			SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+	        simpleMailMessage.setTo(member.getMemberEmail());
+	        System.out.println(member.getMemberEmail());
+	        simpleMailMessage.setFrom("sokim4171@gmail.com");
+	        simpleMailMessage.setSubject("cashbook 비밀번호 찾기 메일");
+	        simpleMailMessage.setText("변경된 비밀번호는" + memberPw + "입니다");
+	         
+	        javaMailSender.send(simpleMailMessage);
+		}
+		return row;
+	}
 	
 	//아이디 찾기용
 	public String getMemberIdByMember(Member member) {
@@ -25,8 +53,8 @@ public class MemberService {
 	
 	
 	//회원 정보 수정
-	public int modifyMember(Member member) {
-		return memberMapper.updateMember(member);
+	public int modifyMember(LoginMember loginMember) {
+		return memberMapper.updateMember(loginMember);
 	}
 	
 

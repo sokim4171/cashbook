@@ -19,6 +19,29 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	//비번찾기용
+	@GetMapping("/findMemberPw")
+	public String findMemberPw(HttpSession session) {
+		if(session.getAttribute("loginMember")!=null){ 
+			return "redirect:/index";
+		}
+		return "findMemberPw";
+	}
+	@PostMapping("/findMemberPw")
+	public String findMemberPw(HttpSession session,Model model,Member member) {
+		if(session.getAttribute("loginMember")!=null){ 
+			return "redirect:/index";
+		}
+		int row =memberService.getMemberPw(member);
+		String msg="아이디와 메일을 확인하세요";
+		if(row==1) {
+			msg="변경한 비밀번호를 입력하였습니다.";
+		} 
+		model.addAttribute("msg", msg);
+		return "redirect:/index";
+	}
+	
+	
 	//아이디 찾기용
 	@GetMapping("/findMemberId")
 	public String findMemberId(HttpSession session) {
@@ -53,13 +76,19 @@ public class MemberController {
 	
 	//회원 정보 
 	@PostMapping("/modifyMember")
-	public String modifyMember(Member member,HttpSession session) {
+	public String modifyMember(LoginMember loginMember,HttpSession session,@RequestParam("memberPw1") String memberPw1) {
 		//로그인 안했을때 
 		if(session.getAttribute("loginMember")==null){ //로그인 해있으면 못하게 막기 
 			return "redirect:/index";
 		}
-		memberService.modifyMember(member);
-		return "redirect:/memberInfo";
+		String memberPw=((LoginMember)(session.getAttribute("loginMember"))).getMemberPw();
+		if(memberPw==memberPw1) {
+			memberService.modifyMember(loginMember);
+			return "redirect:/memberInfo";
+		} else {
+			return "redirect:/modifyMember";
+		}
+		
 	}
 	
 	//회원 탈퇴 뷰
