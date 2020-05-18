@@ -74,21 +74,19 @@ public class MemberController {
 		model.addAttribute("member",member1);
 		return "modifyMember";
 	}
-	
 	//회원 정보 
 	@PostMapping("/modifyMember")
-	public String modifyMember(LoginMember loginMember,HttpSession session,@RequestParam("memberPw1") String memberPw1) {
+	public String modifyMember(LoginMember loginMember,HttpSession session,Member member1) {
 		//로그인 안했을때 
 		if(session.getAttribute("loginMember")==null){ //로그인 해있으면 못하게 막기 
 			return "redirect:/index";
 		}
-		String memberPw=((LoginMember)(session.getAttribute("loginMember"))).getMemberPw();
-		if(memberPw==memberPw1) {
-			memberService.modifyMember(loginMember);
-			return "redirect:/memberInfo";
-		} else {
-			return "redirect:/modifyMember";
-		}
+		
+		memberService.modifyMember(member1);
+		System.out.println(member1 + "<--member.MemberController");
+		
+		return "redirect:/memberInfo";
+		
 		
 	}
 	
@@ -170,6 +168,16 @@ public class MemberController {
 			return "redirect:/index";
 		}
 		System.out.println(memberForm.toString());
+		
+		if(memberForm.getMemberPic() !=null) {
+			//파일은 png, jpg, gif만 업로드 가능
+			if(!memberForm.getMemberPic().getContentType().equals("image/png") && 
+				!memberForm.getMemberPic().getContentType().equals("image/jpeg") &&
+				!memberForm.getMemberPic().getContentType().equals("image/gif")) {
+				return "redirect:/addMember";
+			}
+		}
+		
 		memberService.addMember(memberForm);
 		// service : memberForm->member+폴더에 파일 저장 
 		return "redirect:/index";

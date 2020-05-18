@@ -25,7 +25,7 @@ $(document).ready(function () {
 	
 	
 	$('#updateBtn').click(function () {
-		if($('#memberPw1').val().length===0){
+		if($('#memberPw').val().length===0){
 			helpInit();
 			$('#pwHelper1').text("비밀번호를 입력하세요");
 			console.log("!");
@@ -33,7 +33,7 @@ $(document).ready(function () {
 			helpInit();
 			$('#pwHelper2').text("비밀번호 확인을 입력하세요");
 			console.log("@");
-		} else if($('#memberPw1').val()==$('#memberPw2').val()){
+		} else if($('#memberPw').val()==$('#memberPw2').val()){
 			console.log("#");
 			$('#updateForm').submit();
 		} 
@@ -72,7 +72,7 @@ $(document).ready(function () {
 			<tr>
 				<td>비밀번호</td>
 				<td>
-					<input type="text" id="memberPw1" name="memberPw1" > 
+					<input type="password" id="memberPw" name="memberPw" > 
 					<span id="pwHelper1"></span>
 				</td>
 				
@@ -80,7 +80,7 @@ $(document).ready(function () {
 			<tr>
 				<td>비빌먼호 확인</td>
 				<td>
-					<input type="text" id="memberPw2" name="memberPw2" >
+					<input type="password" id="memberPw2" name="memberPw2" >
 					<span id="pwHelper2"></span>
 				</td>
 			</tr>

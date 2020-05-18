@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,8 @@ public class MemberService {
 	private MemberidMapper memberidMapper;
 	@Autowired
 	private JavaMailSender javaMailSender;
+	@Value("D:\\git-cashbook\\cashbook\\src\\main\\resources\\static\\upload\\")
+	private String path;
 	
 	//비밀번호 변경
 	public int getMemberPw(Member member) {
@@ -57,43 +60,35 @@ public class MemberService {
 	
 	
 	//회원 정보 수정
-	public int modifyMember(LoginMember loginMember) {
-		return memberMapper.updateMember(loginMember);
+	public int modifyMember(Member member) {
+		return memberMapper.updateMember(member);
 	}
 	
 
 	
 	//회원 정보 탈퇴
 	public void removeMember(LoginMember loginMember) {
-		// 1.
+		//1. 멤버 이미지 파일 삭제
+		//1.1  파일이름 select member_pic from member
+		String memberPic=memberMapper.selectMemberPic(loginMember.getMemberId());
+		System.out.println(memberPic);
+		//1.2 파일 삭제
+		File file=new File(path+memberPic);
+		if(file.exists()) {
+			file.delete();
+		}
+		
+		// 2.
 		Memberid memberid = new Memberid();
 		memberid.setMemberId(loginMember.getMemberId());
 		memberidMapper.insertMemberid(memberid);
 
-		// 2. 
+		// 3. 
 		memberMapper.deleteMember(loginMember);
-	}
-	
-	//memberInfo
-	public Member getMemberOne(LoginMember loginMember) {
-		return memberMapper.selectMemberOne(loginMember);
-	}
-	
-	//중복 체크
-	public String memberIdCheck(String memberIdCheck) {
-		return memberMapper.selectMemberId(memberIdCheck); //null, member_id 가 리턴 둘중하나
-	}
-	
-	//로그인용
-	public LoginMember login(LoginMember loginMember) {
-		return memberMapper.selectLoginMember(loginMember);
 	}
 	
 	//회원가입
 	public int addMember(MemberForm memberForm) {
-		//memberForm -> member
-		//member -> 디스크에 물리적으로 저장
-		
 		MultipartFile mf=memberForm.getMemberPic();
 		//확장자가 필요
 		String originName=mf.getOriginalFilename();
@@ -115,6 +110,8 @@ public class MemberService {
 		System.out.println(memberPic+"<--memberPic");
 		
 		//1. db에서 저장
+		//memberForm -> member
+		//member -> 디스크에 물리적으로 저장 
 		Member member=new Member();
 		member.setMemberId(memberForm.getMemberId());
 		member.setMemberPw(memberForm.getMemberPw());
@@ -127,8 +124,8 @@ public class MemberService {
 		int row=memberMapper.insertMember(member);
 		
 		//2. 파일 저장
-		String path="D:\\git-cashbook\\cashbook\\src\\main\\resources\\static\\upload";
-		File file=new File(path+"\\"+memberPic);
+		
+		File file=new File(path+memberPic);
 		try {
 			mf.transferTo(file);
 		} catch (Exception e) {
@@ -140,5 +137,20 @@ public class MemberService {
 		} 
 		
 		return row;
+	}
+
+	//memberInfo
+	public Member getMemberOne(LoginMember loginMember) {
+		return memberMapper.selectMemberOne(loginMember);
+	}
+	
+	//중복 체크
+	public String memberIdCheck(String memberIdCheck) {
+		return memberMapper.selectMemberId(memberIdCheck); //null, member_id 가 리턴 둘중하나
+	}
+	
+	//로그인용
+	public LoginMember login(LoginMember loginMember) {
+		return memberMapper.selectLoginMember(loginMember);
 	}
 }
