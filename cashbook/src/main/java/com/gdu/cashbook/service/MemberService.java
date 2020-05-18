@@ -1,5 +1,7 @@
 package com.gdu.cashbook.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gdu.cashbook.mapper.MemberMapper;
 import com.gdu.cashbook.mapper.MemberidMapper;
@@ -88,9 +91,54 @@ public class MemberService {
 	
 	//회원가입
 	public int addMember(MemberForm memberForm) {
-		Member member=new Member();
 		//memberForm -> member
 		//member -> 디스크에 물리적으로 저장
-		return memberMapper.insertMember(member);
+		
+		MultipartFile mf=memberForm.getMemberPic();
+		//확장자가 필요
+		String originName=mf.getOriginalFilename();
+		
+		/*
+		if(mf.getContentType().equals("image/png") || mf.getContentType().equals("image/jpg")) {
+			//업로드
+		} else {
+			//업로드 실패
+		}
+		*/
+		
+		System.out.println(originName+"<--originName");
+		int lastDot=originName.lastIndexOf("."); //default.jsp출력
+		String extension=originName.substring(lastDot);
+		
+		//새로운 이름을 생성 : UUID
+		String memberPic=memberForm.getMemberId()+extension;
+		System.out.println(memberPic+"<--memberPic");
+		
+		//1. db에서 저장
+		Member member=new Member();
+		member.setMemberId(memberForm.getMemberId());
+		member.setMemberPw(memberForm.getMemberPw());
+		member.setMemberAddr(memberForm.getMemberAddr());
+		member.setMemberEmail(memberForm.getMemberEmail());
+		member.setMemberName(memberForm.getMemberName());
+		member.setMemberPhone(memberForm.getMemberPhone());
+		member.setMemberPic(memberPic);
+		System.out.println(member+"<--member.service");
+		int row=memberMapper.insertMember(member);
+		
+		//2. 파일 저장
+		String path="D:\\git-cashbook\\cashbook\\src\\main\\resources\\static\\upload";
+		File file=new File(path+"\\"+memberPic);
+		try {
+			mf.transferTo(file);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(); 
+			//Exception
+			//1. 예외처리를 해야만 문법적으로 이상없는 예외
+			//2. 예외처리를 코드에서 구현하지 않아도 아무 문제 없는 예외 RuntimeException
+		} 
+		
+		return row;
 	}
 }
