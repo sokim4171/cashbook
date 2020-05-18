@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.gdu.cashbook.service.MemberService;
 import com.gdu.cashbook.vo.LoginMember;
 import com.gdu.cashbook.vo.Member;
+import com.gdu.cashbook.vo.MemberForm;
 
 @Controller
 public class MemberController {
@@ -163,13 +164,14 @@ public class MemberController {
 	}
 	//회원가입 액션
 	@PostMapping("/addMember")
-	public String addMember(Member member,HttpSession session) { 
+	public String addMember(MemberForm memberForm,HttpSession session) { 
 		//로그인 때
 		if(session.getAttribute("loginMember")!=null){ //이미 로그인이 되어있으면  addMemer가 할 필요가 없으니 인덱스로 돌아가기 
 			return "redirect:/index";
 		}
-		System.out.println(member.toString());
-		memberService.addMember(member);
+		System.out.println(memberForm.toString());
+		memberService.addMember(memberForm);
+		// service : memberForm->member+폴더에 파일 저장 
 		return "redirect:/index";
 	}
 

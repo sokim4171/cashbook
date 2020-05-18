@@ -12,6 +12,7 @@ import com.gdu.cashbook.mapper.MemberMapper;
 import com.gdu.cashbook.mapper.MemberidMapper;
 import com.gdu.cashbook.vo.LoginMember;
 import com.gdu.cashbook.vo.Member;
+import com.gdu.cashbook.vo.MemberForm;
 import com.gdu.cashbook.vo.Memberid;
 
 @Service
@@ -86,7 +87,10 @@ public class MemberService {
 	}
 	
 	//회원가입
-	public int addMember(Member member) {
+	public int addMember(MemberForm memberForm) {
+		Member member=new Member();
+		//memberForm -> member
+		//member -> 디스크에 물리적으로 저장
 		return memberMapper.insertMember(member);
 	}
 }

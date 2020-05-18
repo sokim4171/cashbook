@@ -97,8 +97,16 @@
 		</div>
 	</form>
 	
-	<form action="/addMember" method="post" id="myform">
+	<form action="/addMember" method="post" id="myform" enctype="multipart/form-data">
 	<div align="center">
+	
+		<div>
+			사진 : 
+			<input type="file" name="memberPic" id="memberPic">
+		</div>
+	
+	
+	
 		<div>
 			아이디 : <input type="text" name="memberId" id="memberId" class="form-control"  style="width: 500px"
 					readonly="readonly" th:value="${confirmMemberId}">
