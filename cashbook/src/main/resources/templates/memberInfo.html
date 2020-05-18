@@ -4,6 +4,35 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+    body {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-position: 0 0;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        position: relative;
+        overflow-y: auto;
+    }
+    
+    #aside {
+        width: 200px;
+        height: 3000px;
+        position: fixed;
+        background: #CD6876;
+        overflow: hidden;
+        float: left;
+    }
+    
+    #section {
+        margin-left: 300px;
+        background: white;
+    }
+</style>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
@@ -17,8 +46,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div id="body">
+<div id="aside">
 	<h1> 회원정보 </h1>
 	<div th:include="/include/menu::sidemenu"></div>
+</div>	
+<div id="section">
 	<div>
 		<a th:href="@{/removeMember}">회원 탈퇴</a>
 		<a th:href="@{/modifyMember}">회원 수정</a>
@@ -51,6 +84,7 @@
 			<td th:text="${member.memberEmail}"></td>
 		</tr>
 	</table>
-
+</div>
+</div>
 </body>
 </html>
