@@ -1,9 +1,11 @@
 package com.gdu.cashbook.vo;
 
+import java.time.LocalDate;
+
 public class Cash {
    private int cashNo;
    private String memberId;
-   private String cashDate;
+   private LocalDate cashDate;
    private String cashKind;
    private String categoryName;
    private int cashPrice;
@@ -22,12 +24,7 @@ public class Cash {
    public void setMemberId(String memberId) {
       this.memberId = memberId;
    }
-   public String getCashDate() {
-      return cashDate;
-   }
-   public void setCashDate(String cashDate) {
-      this.cashDate = cashDate;
-   }
+   
    public String getCashKind() {
       return cashKind;
    }
@@ -59,7 +56,10 @@ public class Cash {
       this.cashMemo = cashMemo;
    }
    
-   @Override
+   public void setCashDate(LocalDate cashDate) {
+	this.cashDate = cashDate;
+}
+@Override
    public String toString() {
       return "Cash [cashNo=" + cashNo + ", memberId=" + memberId + ", cashDate=" + cashDate + ", cashKind=" + cashKind
             + ", categoryName=" + categoryName + ", cashPrice=" + cashPrice + ", cashPlace=" + cashPlace

@@ -53,13 +53,14 @@
 	<div th:include="/include/menu::sidemenu"></div>
 </div>	
 <div id="section">
-<div>
-	<h1 th:text="${today}"></h1>
+	<h1>가계부</h1>
 	
-	<div class="row">
-		<a href="">이전</a>
-		<a href="">다음</a>
-	</div>
+
+	<h1 class="text-center" th:text="${day}"></h1>
+    <div>
+       <a th:href="@{/getCashListByDate(day = ${day.plusDays(-1)})}">이전</a>
+       <a th:href="@{/getCashListByDate(day = ${day.plusDays(+1)})}">다음</a>
+    </div>
 	
 	<table class="table table-bordered">
 		<thead>
@@ -90,21 +91,20 @@
 				
 				<td th:text="${list.cashPlace}">cash_place</td>
 				<td th:text="${list.cashMemo}">cash_memo</td>
-				<td><a href="">삭제</a></td>
-				<td><a href="">수정</a></td>
+				<td><a th:href="@{/removeCash(cashNo=${list.cashNo})}">삭제</a></td>
+				<td><a th:href="@{/modifyCash(cashNo=${list.cashNo})}">수정</a></td>
 			</tr>
 		</tbody>
 	</table>
 	
 	
-	<a href="" class="btn btn-primary">입력</a>
+	<a href="/insertCash" class="btn btn-primary">입력</a>
 	
-	<h5>합계  : </h5>
+	<h5 th:text="'합계  :' +${cashKindSum}"></h5>
 	
 </div>	
 	
 	
-</div>
 </div>
 </body>
 </html>
