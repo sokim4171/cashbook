@@ -55,45 +55,51 @@
 <div id="section">
 <div>
 	<h1 th:text="${today}"></h1>
-
-	
-	<table class="table table-bordered">
-		<tr>	
-			<td>번호</td>
-			<td>카테고리</td>
-			<td>수입</td>
-			<td>지출</td>
-			<td>장소</td>
-			<td>메모</td>
-			<td>삭제</td>
-			<td>수정</td>
-		</tr>
-		
-		<tr th:each="list,index :${list}">
-			
-			<td th:text="${index.index}+1">번호</td>
-			<td th:text="${list.categoryName}">캍고리</td>
-			
-			<!-- 수입 -->
-			<td th:if="${list.cashKind}=='수입'" th:text="${'+' + list.cashPrice}"></td>
-			<td th:unless="${list.cashKind}=='수입'"></td> 
-			
-			<!-- 지출 -->
-			<td th:if="${list.cashKind}=='지출'" th:text="${'-' + list.cashPrice}"></td>
-			<td th:unless="${list.cashKind}=='지출'"></td> 
-			
-			<td th:text="${list.cashPlace}">cash_place</td>
-			<td th:text="${list.cashMemo}">cash_memo</td>
-			<td><a href="">삭제</a></td>
-			<td><a href="">수정</a></td>
-		</tr>
-	</table>
 	
 	<div class="row">
 		<a href="">이전</a>
 		<a href="">다음</a>
 	</div>
 	
+	<table class="table table-bordered">
+		<thead>
+			<tr>	
+				<td>번호</td>
+				<td>카테고리</td>
+				<td>수입</td>
+				<td>지출</td>
+				<td>장소</td>
+				<td>메모</td>
+				<td>삭제</td>
+				<td>수정</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="list,index :${list}">
+				
+				<td th:text="${index.index}+1">번호</td>
+				<td th:text="${list.categoryName}">캍고리</td>
+				
+				<!-- 수입 -->
+				<td th:if="${list.cashKind}=='수입'" th:text="${'+' + list.cashPrice}"></td>
+				<td th:unless="${list.cashKind}=='수입'"></td> 
+				
+				<!-- 지출 -->
+				<td th:if="${list.cashKind}=='지출'" th:text="${'-' + list.cashPrice}"></td>
+				<td th:unless="${list.cashKind}=='지출'"></td> 
+				
+				<td th:text="${list.cashPlace}">cash_place</td>
+				<td th:text="${list.cashMemo}">cash_memo</td>
+				<td><a href="">삭제</a></td>
+				<td><a href="">수정</a></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	
+	<a href="" class="btn btn-primary">입력</a>
+	
+	<h5>합계  : </h5>
 	
 </div>	
 	
