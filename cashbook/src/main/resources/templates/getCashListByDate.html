@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>getCashListByDate</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<style>
+	body {
+	        padding: 0;
+	        margin: 0;
+	        width: 100%;
+	        height: 100%;
+	        overflow: hidden;
+	        background-position: 0 0;
+	        background-repeat: no-repeat;
+	        background-attachment: fixed;
+	        background-size: cover;
+	        position: relative;
+	        overflow-y: auto;
+	}
+    
+    #aside {
+        width: 200px;
+        height: 3000px;
+        position: fixed;
+        background: #CD6876;
+        overflow: hidden;
+        float: left;
+    }
+    
+    #section {
+        margin-left: 300px;
+        background: white;
+    }
+</style> 
+</head>
+
+<body>
+<div id="body">
+<div id="aside">
+	<h1>getCashListByDate</h1>
+	<div th:include="/include/menu::sidemenu"></div>
+</div>	
+<div id="section">
+<div>
+	<h1 th:text="${today}"></h1>
+
+	
+	<table class="table table-bordered">
+		<tr>	
+			<td>번호</td>
+			<td>카테고리</td>
+			<td>수입</td>
+			<td>지출</td>
+			<td>장소</td>
+			<td>메모</td>
+			<td>삭제</td>
+			<td>수정</td>
+		</tr>
+		
+		<tr th:each="list,index :${list}">
+			
+			<td th:text="${index.index}+1">번호</td>
+			<td th:text="${list.categoryName}">캍고리</td>
+			
+			<!-- 수입 -->
+			<td th:if="${list.cashKind}=='수입'" th:text="${'+' + list.cashPrice}"></td>
+			<td th:unless="${list.cashKind}=='수입'"></td> 
+			
+			<!-- 지출 -->
+			<td th:if="${list.cashKind}=='지출'" th:text="${'-' + list.cashPrice}"></td>
+			<td th:unless="${list.cashKind}=='지출'"></td> 
+			
+			<td th:text="${list.cashPlace}">cash_place</td>
+			<td th:text="${list.cashMemo}">cash_memo</td>
+			<td><a href="">삭제</a></td>
+			<td><a href="">수정</a></td>
+		</tr>
+	</table>
+	
+	<div class="row">
+		<a href="">이전</a>
+		<a href="">다음</a>
+	</div>
+	
+	
+</div>	
+	
+	
+</div>
+</div>
+</body>
+</html>

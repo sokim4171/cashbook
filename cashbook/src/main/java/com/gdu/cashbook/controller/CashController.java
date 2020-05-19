@@ -2,6 +2,7 @@ package com.gdu.cashbook.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -20,7 +21,7 @@ public class CashController {
    @Autowired private CashService cashService;
    
    //지출 수입 리스트
-   @GetMapping("getCashListByDate")
+   @GetMapping("/getCashListByDate")
    public String getCashListByDate(HttpSession session, Model model) {
       //session
       if(session.getAttribute("loginMember") == null) {
@@ -31,7 +32,7 @@ public class CashController {
       String loginMember = ((LoginMember)(session.getAttribute("loginMember"))).getMemberId();
       
       //오늘 날짜
-      Calendar today = Calendar.getInstance();
+      Date today = new Date();
       SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
       String strToday =sdf.format(today);
       System.out.println(strToday+"<--strToday");
