@@ -1,13 +1,18 @@
 package com.gdu.cashbook.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gdu.cashbook.vo.Cash;
+import com.gdu.cashbook.vo.DayAndSum;
 
 @Mapper
 public interface CashMapper {
+	
+	//
+	public List<DayAndSum> selecetDayAndPriceList(Map<String,Object> map);
 	
 	
 	

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<style>
+	body {
+	        padding: 0;
+	        margin: 0;
+	        width: 100%;
+	        height: 100%;
+	        overflow: hidden;
+	        background-position: 0 0;
+	        background-repeat: no-repeat;
+	        background-attachment: fixed;
+	        background-size: cover;
+	        position: relative;
+	        overflow-y: auto;
+	}
+    
+    #aside {
+        width: 200px;
+        height: 3000px;
+        position: fixed;
+        background: #CD6876;
+        overflow: hidden;
+        float: left;
+    }
+    
+    #section {
+        margin-left: 300px;
+        background: white;
+    }
+    
+    div.gd-left{
+    	float: left;
+    	width: 100px; height: 100px;
+    	border: 1px solid #000000;
+    	margin-right: 10px;
+    	margin-bottom: 10px;
+    	border-radius: 5px;
+    	text-align: center;
+    }
+    div.gd-clear{
+    	clear: both;
+    	border-radius: 5px;
+    	color: #FF0000;
+    	text-align: center;
+    }
+    div.gd-title {
+		height: 40px;
+		background-color: gray;
+		text-align: center;
+	}
+    .gd-blue{
+    	color: blue;
+    }
+    .gd-red{
+    	color: red;
+    }
+</style> 
+</head>
+
+<body>
+<div id="body">
+<div id="aside">
+	<h2>월별 가계부</h2>
+	<div th:include="/include/menu::sidemenu"></div>
+</div>	
+<div id="section" >
+	<h1>월별 가계부 관리</h1>
+	<h3 th:text="${month+'월'}"></h3> <!-- cDay.get(Calendar.MONTH)+1 컨트롤러에서 넘겨줌-->
+	
+	 <div>
+       <a th:href="@{/getCashListByMonth(day = ${day.plusMonths(-1)})}">이전</a>
+       <a th:href="@{/getCashListByMonth(day = ${day.plusMonths(+1)})}">다음</a>
+    </div>
+	
+	
+	<div class="gd-clear gd-left gd-title">일</div>
+	<div class="gd-left gd-title">월</div>
+	<div class="gd-left gd-title">화</div>
+	<div class="gd-left gd-title">수</div>
+	<div class="gd-left gd-title">목</div>
+	<div class="gd-left gd-title">금</div>
+	<div class="gd-left gd-title">토</div>
+	<!-- 5월달 lastDay 31이다  -->
+	<div 
+		th:class="${index.index%7==0}?'gd-clear gd-left': 'gd-left'" 
+		th:each="i,index : ${#numbers.sequence(1,lastDay+firstDayOfWeek-1)}">
+		<div th:text="${(i-firstDayOfWeek+1)}>0 ? ${(i-firstDayOfWeek+1)} :'' "></div> <!-- 날짜 -->
+		<div th:each="ds : ${dayAndPriceList} "> <!-- 수입 지출 합 -->
+			<div th:if="${i-firstDayOfWeek+1==ds.day}" >
+				<span th:text="${ds.price}" th:class="${ds.price}>0 ? 'gd-blue' : 'gd-red'"></span>
+			</div>
+		</div>
+	</div>
+		
+</div>
+</div>
+</body>
+</html>

@@ -9,10 +9,24 @@ import org.springframework.stereotype.Service;
 
 import com.gdu.cashbook.mapper.CashMapper;
 import com.gdu.cashbook.vo.Cash;
+import com.gdu.cashbook.vo.DayAndSum;
 
 @Service
 public class CashService {
    @Autowired private CashMapper cashMapper;
+   
+   
+   
+   //
+   public List<DayAndSum> getCashAndPrice(int year, int month,String memberId) {
+	   Map<String , Object> map= new HashMap<>();
+	   map.put("memberId", memberId);
+	   map.put("year", year);
+	   map.put("month", month);
+	   return cashMapper.selecetDayAndPriceList(map);
+   }
+   
+   
    
    //리스트 추가 + 가계부 드롭다운 
    public Map<String, Object> addCashList(Cash cash){

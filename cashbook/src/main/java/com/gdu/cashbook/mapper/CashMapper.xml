@@ -5,8 +5,17 @@
 <mapper namespace="com.gdu.cashbook.mapper.CashMapper"> 
 
 	
-
-	
+	<!-- 한달 총 합 구하기 리스트 -->
+	<select id="selecetDayAndPriceList" parameterType="java.util.Map" resultType="com.gdu.cashbook.vo.DayAndSum">
+		SELECT DAY(cash_date) AS day,
+				SUM(CASE WHEN cash_kind='수입' THEN cash_price
+					when cash_kind='지출' THEN -cash_price END) AS price
+		FROM cash
+		WHERE YEAR(cash_date)=#{year}
+		AND MONTH(cash_date)=#{month}
+		AND member_id=#{memberId}
+		GROUP BY DAY(cash_date)
+	</select>
 	
 
 	<!-- 가계부내용 추가  -->
