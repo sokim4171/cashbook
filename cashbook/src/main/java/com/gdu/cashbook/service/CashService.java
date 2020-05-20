@@ -17,7 +17,7 @@ public class CashService {
    
    
    
-   //
+   //월별 수입 지출 
    public List<DayAndSum> getCashAndPrice(int year, int month,String memberId) {
 	   Map<String , Object> map= new HashMap<>();
 	   map.put("memberId", memberId);

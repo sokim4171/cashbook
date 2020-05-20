@@ -25,7 +25,7 @@ import com.gdu.cashbook.vo.LoginMember;
 public class CashController {
    @Autowired private CashService cashService;
    
-   
+   //월별 수입 지출 및 캘린더 출력 뷰 
    @GetMapping("/getCashListByMonth")
    public String getCashListByMonth(HttpSession session,Model model, 
 	         @RequestParam(value="day", required = false) @DateTimeFormat(pattern ="yyyy-MM-dd") LocalDate day) {

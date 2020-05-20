@@ -11,9 +11,10 @@ import com.gdu.cashbook.vo.DayAndSum;
 @Mapper
 public interface CashMapper {
 	
-	//
-	public List<DayAndSum> selecetDayAndPriceList(Map<String,Object> map);
 	
+	
+	//월별 수입 지출 
+	public List<DayAndSum> selecetDayAndPriceList(Map<String,Object> map);
 	
 	
 	
