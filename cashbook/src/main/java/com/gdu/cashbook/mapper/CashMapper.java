@@ -20,8 +20,6 @@ public interface CashMapper {
 	
 	//가계부내용 추가
 	public int insertCash(Cash cash);
-	//가계부 내용 추가 내에 카테고리 드롭다운용
-	public List<Cash> selectCashCategoryList();
 	
 	
 	//리스트 삭제

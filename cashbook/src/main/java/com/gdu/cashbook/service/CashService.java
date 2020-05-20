@@ -6,15 +6,25 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.gdu.cashbook.mapper.CashMapper;
+import com.gdu.cashbook.mapper.CategoryMapper;
 import com.gdu.cashbook.vo.Cash;
+import com.gdu.cashbook.vo.Category;
 import com.gdu.cashbook.vo.DayAndSum;
 
 @Service
+@Transactional
 public class CashService {
    @Autowired private CashMapper cashMapper;
-   
+   @Autowired private CategoryMapper categoryMapper;
+	
+	//카테고리 리스트 출력 -> 가계부 드롭다운 
+	public List<Category> selectCategoryList(){
+		List<Category> categorylist=categoryMapper.selectCashCategoryList();
+		return categorylist;
+	}
    
    
    //월별 수입 지출 
@@ -28,13 +38,10 @@ public class CashService {
    
    
    
-   //리스트 추가 + 가계부 드롭다운 
-   public Map<String, Object> addCashList(Cash cash){
-	   cashMapper.insertCash(cash);
-	   List<Cash> list=cashMapper.selectCashCategoryList();
-	   Map<String, Object> map=new HashMap<String, Object>();
-	   map.put("list", list);
-	   return map;
+   
+   //리스트 추가 
+   public int addCashList(Cash cash){
+	   return cashMapper.insertCash(cash);
    }
    
    //리스트 삭제

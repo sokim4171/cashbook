@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.cashbook.service.CashService;
 import com.gdu.cashbook.vo.Cash;
+import com.gdu.cashbook.vo.Category;
 import com.gdu.cashbook.vo.DayAndSum;
 import com.gdu.cashbook.vo.LoginMember;
 
@@ -87,17 +88,24 @@ public class CashController {
    }
    
    //가계부내용 추가
-   @GetMapping("/insertCash")
-   public String insertCash(HttpSession session) {
+   @GetMapping("/addCash")
+   public String addCash(HttpSession session,Model model) {
 	 //session
       if(session.getAttribute("loginMember") == null) {
          return "redirect:/login";
       }
-	   return "modifyCash";
+      List<Category> list =cashService.selectCategoryList();
+
+      for (Category category : list) {
+		System.out.println(category);
+      }
+      model.addAttribute("categoryList", list);
+      
+      return "addCash";
    }
-   @PostMapping("/insertCash")
+   @PostMapping("/addCash")
    /*
-	public String insertCash() {
+	public String addCash() {
 	}
     */
 	   

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.cashbook.mapper.CategoryMapper"> 
+	<!-- 가계부 내용내 카테고리 드롭다운용 -->
+	<select id="selectCashCategoryList" resultType="com.gdu.cashbook.vo.Category">
+		select 
+			category_name categoryName
+		from category
+	</select>
+
+
+
+	
+	
+</mapper>

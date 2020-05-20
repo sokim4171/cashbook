@@ -34,16 +34,7 @@
 			#{cashMemo}
 		)
 	</insert>
-	<!-- 가계부 내용내 카테고리 드롭다운용 -->
-	<select id="selectCashCategoryList" resultType="com.gdu.cashbook.vo.Cash">
-		select 
-			category_name
-		from cash 
-	</select>
-
-
-
-
+	
 
 
 	<!-- 리스트 삭제 -->

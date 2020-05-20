@@ -91,19 +91,25 @@
 </div>	
 <div id="section">
 	<h1>가계부 추가</h1>
-	<form action="/insertCash" method="post" id="myform">
-		<table>
+	<form action="/addCash" method="post" id="myform">
+		<table class="table table-bodered">
 			<tr>
 				<td>카테고리</td>
 				<td>
-					<input type="text" id="categoryName" name="categoryName"> 
+					<select id="categoryName" name="categoryName" > 
+						<option th:each="list :${categoryList}" th:text="${list.categoryName}"
+						th:value="${list.categoryName}"></option>
+					</select>
 					<span id="categoryHelper"></span>
 				</td>
 			</tr>
 			<tr>
 				<td>수입/지출</td>
 				<td>
-					<input type="text" id="cashKind" name="cashKind" >
+					<select id="cashKind" name="cashKind" >
+						<option value="수입">수입</option>
+						<option value="지출">지출</option>
+					</select>
 					<span id="kindHelper"></span>
 				</td>
 			</tr>
