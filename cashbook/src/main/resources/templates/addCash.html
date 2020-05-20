@@ -91,7 +91,7 @@
 </div>	
 <div id="section">
 	<h1>가계부 추가</h1>
-	<form action="/addCash" method="post" id="myform">
+	<form th:action="@{/addCash(day=${day})}" method="post" id="myform">
 		<table class="table table-bodered">
 			<tr>
 				<td>카테고리</td>
@@ -116,7 +116,7 @@
 			<tr>
 				<td>금액</td>
 				<td>
-					<input type="text" id="cashPrice" name="cashPrice">
+					<input type="text" id="cashPrice" th:name="cashPrice">
 					<span id="priceHelper"></span>
 				</td>
 			</tr>

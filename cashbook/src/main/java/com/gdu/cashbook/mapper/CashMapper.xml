@@ -21,17 +21,21 @@
 	<!-- 가계부내용 추가  -->
 	<insert id="insertCash" parameterType="com.gdu.cashbook.vo.Cash">
 		insert into cash(
+			member_id,
 			category_name,
 			cash_kind,
 			cash_price,
 			cash_place,
-			cash_memo
+			cash_memo,
+			cash_date
 		) VALUES(
+			#{memberId},
 			#{categoryName},
 			#{cashKind},
 			#{cashPrice},
 			#{cashPlace},
-			#{cashMemo}
+			#{cashMemo},
+			#{cashDate}
 		)
 	</insert>
 	
