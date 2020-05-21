@@ -84,6 +84,38 @@ public class CashController {
 		return "getCashListByMonth";
 	}
 
+	// 가계부 내용 수정
+	@GetMapping("/modifyCash")
+	public String modifyCash(HttpSession session, Model model,
+			@RequestParam("cashNo") int cashNo) {
+		// session
+		if (session.getAttribute("loginMember") == null) {
+			return "redirect:/login";
+		}
+		List<Category> list = cashService.selectCategoryList();
+		Cash cash=cashService.getCashOne(cashNo);
+		for (Category category : list) {
+			System.out.println(category);
+		}
+		model.addAttribute("categoryList", list);
+		model.addAttribute("cash", cash);
+		model.addAttribute("cashNo", cashNo);
+		return "modifyCash";
+	}
+
+	@PostMapping("/modifyCash")
+	public String modifyCash(HttpSession session, Cash cash,
+			@RequestParam("cashNo") int cashNo) {
+		cash.setCashNo(cashNo);
+		cash.setCategoryName(cash.getCategoryName());
+		cash.setCashKind(cash.getCashKind());
+		cash.setCashPrice(cash.getCashPrice());
+		cash.setCashPlace(cash.getCashPlace());
+		cash.setCashMemo(cash.getCashMemo());
+		cashService.modifyCash(cash);
+		return "redirect:/getCashListByDate";
+	}
+	
 	// 가계부내용 추가
 	@GetMapping("/addCash")
 	public String addCash(HttpSession session, Model model,
@@ -99,7 +131,7 @@ public class CashController {
 		}
 		model.addAttribute("categoryList", list);
 		model.addAttribute("day", day);
-		
+
 		return "addCash";
 	}
 

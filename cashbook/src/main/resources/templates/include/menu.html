@@ -21,7 +21,7 @@
 	<div th:fragment="sidemenu"> 
 		<div><span th:text="${session.loginMember.memberId}"></span>님</div>
 		<ul>
-			<li><a th:href="@{/home}">홈</a></li>
+			<li><a th:href="@{/home}" class="">홈</a></li>
 			<li><a th:href="@{/memberInfo}">회원정보</a></li>
 			<li><a th:href="@{/getCashListByDate}">일별 가계부 </a></li>
 			<li><a th:href="@{/getCashListByMonth}">월별 가계부 </a></li>

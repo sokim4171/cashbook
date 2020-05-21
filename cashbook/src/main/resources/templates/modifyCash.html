@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<style>
+	body {
+	        padding: 0;
+	        margin: 0;
+	        width: 100%;
+	        height: 100%;
+	        overflow: hidden;
+	        background-position: 0 0;
+	        background-repeat: no-repeat;
+	        background-attachment: fixed;
+	        background-size: cover;
+	        position: relative;
+	        overflow-y: auto;
+	}
+    
+    #aside {
+        width: 200px;
+        height: 3000px;
+        position: fixed;
+        background: #CD6876;
+        overflow: hidden;
+        float: left;
+    }
+    
+    #section {
+        margin-left: 300px;
+        background: white;
+    }
+</style> 
+<script>
+
+	let helpInit = function() {
+		$("#categoryHelper").text("");
+		$("#kindHelper").text("");
+		$("#priceHelper").text("");
+		$("#placeHelper").text("");
+	}
+
+	$(document).ready(function() {
+		
+		$("#btn").click(function() {
+			console.log("click");
+			if ($("#categoryName").val().length===0) { 
+				helpInit();
+				$("#categoryHelper").text("카테고리를 선택해주세요");
+				$("#categoryName").focus();
+			} else if ($("#cashKind").val().length ===0) {
+				helpInit();
+				$("#kindHelper").text("수입/지출을 선택해주세요");
+				$("#cashKind").focus();
+			} else if ($("#cashPrice").val().length === 0) {
+				helpInit();
+				$("#priceHelper").text("가격을 입력해주세요");
+				$("#cashPrice").focus();
+			} else if ($("#cashPlace").val().length === 0) {
+				helpInit();
+				$("#placeHelper").text("장소를 입력해주세요");
+				$("#cashPlace").focus();
+			} else {
+				$("#myform").submit();
+			}
+		});
+
+		
+	});
+</script>
+</head>
+
+<body>
+<div id="body">
+<div id="aside">
+	<h1>가계부 관리</h1>
+	<div th:include="/include/menu::sidemenu"></div>
+</div>	
+<div id="section">
+	<h1>가계부 추가</h1>
+	<form th:action="@{/modifyCash(cashNo=${cashNo})}" method="post" id="myform">
+		<input type="hidden" th:value="${cash.cashNo}">
+		<table class="table table-bodered">
+			<tr>
+				<td>카테고리</td>
+				<td>
+					<select id="categoryName" name="categoryName" > 
+						<option value="">::선택하세요::</option>
+						<option th:each="list :${categoryList}" th:text="${list.categoryName}"
+						th:value="${list.categoryName}" ></option>
+					</select>
+					<span id="categoryHelper"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>수입/지출</td>
+				<td>
+					<select id="cashKind" name="cashKind" >
+						<option value="">::선택하세요::</option>
+						<option value="수입">수입</option>
+						<option value="지출">지출</option>
+					</select>
+					<span id="kindHelper"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>금액</td>
+				<td>
+					<input type="text" id="cashPrice" th:name="cashPrice" th:value="${cash.cashPrice}">
+					<span id="priceHelper"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>장소</td>
+				<td>
+					<input type="text" id="cashPlace" name="cashPlace" th:value="${cash.cashPlace}">
+					<span id="placeHelper"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>메모</td>
+				<td>
+					<input type="text" id="cashMemo" name="cashMemo" th:value="${cash.cashMemo}">
+				</td>
+			</tr>
+		</table>
+		<button type="button" id="btn">추가</button>
+	</form>
+</div>
+</div>
+</body>
+</html>
