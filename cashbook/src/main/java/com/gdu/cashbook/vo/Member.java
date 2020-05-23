@@ -8,6 +8,13 @@ public class Member {
 	private String memberPhone;
 	private String memberEmail;
 	private String memberPic;
+	private int memberLevel;
+	public int getMemberLevel() {
+		return memberLevel;
+	}
+	public void setMemberLevel(int memberLevel) {
+		this.memberLevel = memberLevel;
+	}
 	public String getMemberPic() {
 		return memberPic;
 	}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<style>
+    body {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-position: 0 0;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        position: relative;
+        overflow-y: auto;
+    }
+    
+    #aside {
+        width: 200px;
+        height: 3000px;
+        position: fixed;
+        background: #CD6876;
+        overflow: hidden;
+        float: left;
+    }
+    
+    #section {
+        margin-left: 300px;
+        background: white;
+    }
+</style>
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function () {
+	let helpInit = function() {
+		$("#").text("");
+		$("#").text("");
+	}
+	
+	
+	
+	$('#').click(function () {
+		
+	});
+});
+</script>
+</head>
+<body>
+<div id="body">
+<div id="aside">
+	<h1>boardList</h1>
+	<!-- 사이드 메뉴 -->
+	<!-- <div th:include="/include/menu::sidemenu"></div>  -->
+</div>	
+<div id="section">
+	<h1>질문 게시판</h1>
+	<table class="table">
+		<tr>
+			<td>board_no</td>
+			<td>board_title</td>
+			<td>member_id</td>
+			<td>board_date</td>
+		</tr>
+		<tr th:each="list :${bList}" >
+			<td th:text="${list.boardNo}"></td>
+			<td>
+				<a th:href="@{/boardListDetail(boardNo=${list.boardNo})}">
+                    <span th:text="${list.boardTitle}"></span>
+                </a>
+			</td>
+			<td th:text="${list.memberId}"></td>
+			<td th:text="${list.boardDate}"></td>
+		</tr>
+		
+	</table>
+	
+	<div>
+		<a th:href="@{/boardList}" class="btn btn-outline-dange">이전</a>
+		<a th:href="@{/boardList}" class="btn btn-outline-dange">다음</a>
+	</div>
+</div>	
+</div>	
+</body>
+</html>
