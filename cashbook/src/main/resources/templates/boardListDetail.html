@@ -50,35 +50,15 @@ body {
 </style>
 <script>
 	let helpInit = function() {
-		$("#categoryHelper").text("");
-		$("#kindHelper").text("");
-		$("#priceHelper").text("");
-		$("#placeHelper").text("");
+		$("#").text("");
+		
 	}
 
 	$(document).ready(function() {
 
-		$("#btn").click(function() {
+		$("#commentBtn").click(function() {
 			console.log("click");
-			if ($("#categoryName").val().length === 0) {
-				helpInit();
-				$("#categoryHelper").text("카테고리를 선택해주세요");
-				$("#categoryName").focus();
-			} else if ($("#cashKind").val().length === 0) {
-				helpInit();
-				$("#kindHelper").text("수입/지출을 선택해주세요");
-				$("#cashKind").focus();
-			} else if ($("#cashPrice").val().length === 0) {
-				helpInit();
-				$("#priceHelper").text("가격을 입력해주세요");
-				$("#cashPrice").focus();
-			} else if ($("#cashPlace").val().length === 0) {
-				helpInit();
-				$("#placeHelper").text("장소를 입력해주세요");
-				$("#cashPlace").focus();
-			} else {
-				$("#myform").submit();
-			}
+			$("#commentForm").submit();
 		});
 
 	});
@@ -114,15 +94,15 @@ body {
 			</table>
 			
 			
-			<!-- 댓글창  -->
-			<form action="@{/addComment}" method="post">
+			<!-- 댓글 입력 창  -->
+			<form action="@{/addComment}" method="get" id="commentForm">
 				<div class="input-group mb-3">
 					<input type="text" class="form-control" id="commentContent" name="commentContent">
-					<input type="hidden"  ><!-- 작성자 아이디 넘겨야함 --> 
-					<div class="input-group-append">
-						<button class="btn btn-success" type="button" id="commentBtn">추가</button>
-					</div>
+					<!-- 작성자 아이디 넘겨야함 --> 
+					<input type="hidden" name="memberId" value="${memberId}">
+					<input type="hidden" name="boardNo" value="${board.boardNo}">
 				</div>
+					<button class="btn btn-success" type="button" id="commentBtn">추가</button>
 			</form>
 			
 			<!-- 댓글 리스트 -->

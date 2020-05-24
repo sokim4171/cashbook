@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.cashbook.service.BoardService;
 import com.gdu.cashbook.service.CommentService;
 import com.gdu.cashbook.vo.Board;
 import com.gdu.cashbook.vo.Comment;
+import com.gdu.cashbook.vo.LoginMember;
 
 @Controller
 public class BoardController {
@@ -21,6 +23,16 @@ public class BoardController {
 	private BoardService boardService;
 	@Autowired
 	private CommentService commentService;
+	
+	@GetMapping("/addComment")
+	public String addComment(HttpSession session,Comment comment,
+			@RequestParam("boardNo") int boardNo) {
+		commentService.addComment(comment);
+		return "redirect:/boardListDetail";
+	}
+	
+	
+	
 	
 	@GetMapping("/boardListDetail")
 	public String boardListDetail(Model model,HttpSession session,
@@ -44,6 +56,9 @@ public class BoardController {
 		*/
 		List<Board> boardList=boardService.getBoardList();
 		model.addAttribute("bList", boardList);
+		
+		String memberId=((LoginMember)session.getAttribute("loginMember")).getMemberId();
+		model.addAttribute("memberId", memberId);
 		
 		return "boardList";
 	}

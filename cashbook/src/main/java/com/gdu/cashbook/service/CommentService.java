@@ -14,7 +14,12 @@ import com.gdu.cashbook.vo.Comment;
 public class CommentService {
 	@Autowired
 	private CommentMapper commentMapper;
+	//댓글 추가
+	public int addComment(Comment comment) {
+		return commentMapper.insertComment(comment);
+	}
 	
+	//댓글리스트 출력
 	public List<Comment> getCommentByBoard(int boardNo){
 		return commentMapper.selectCommentListByBoard(boardNo);
 	}
