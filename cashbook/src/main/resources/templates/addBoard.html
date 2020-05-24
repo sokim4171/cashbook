@@ -45,44 +45,38 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script>
 $(document).ready(function () {
-	
+	$("#boardBtn").click(function() {
+		console.log("click");
+		$("#boardForm").submit();
+	});
 });
 </script>
 </head>
 <body>
 <div id="body">
 <div id="aside">
-	<h1>boardList</h1>
+	<h1>addBoard</h1>
 	<!-- 사이드 메뉴 -->
 	<!-- <div th:include="/include/menu::sidemenu"></div>  -->
 </div>	
 <div id="section">
-	<h1>질문 게시판</h1>
-	<a th:href="@{/addBoard}">질문 입력</a>
-	<table class="table">
-		<tr>
-			<td>board_no</td>
-			<td>board_title</td>
-			<td>member_id</td>
-			<td>board_date</td>
-		</tr>
-		<tr th:each="list :${bList}" >
-			<td th:text="${list.boardNo}"></td>
-			<td>
-				<a th:href="@{/boardListDetail(boardNo=${list.boardNo})}">
-                    <span th:text="${list.boardTitle}"></span>
-                </a>
-			</td>
-			<td th:text="${list.memberId}"></td>
-			<td th:text="${list.boardDate}"></td>
-		</tr>
-		
-	</table>
-	
-	<div>
-		<a th:href="@{/boardList}" class="btn btn-outline-dange">이전</a>
-		<a th:href="@{/boardList}" class="btn btn-outline-dange">다음</a>
-	</div>
+	<h1>질문 추가</h1>
+	<form action="@{/addBoard}" method="post" id="boardForm">
+		<div>
+			제목 :
+			<input type="text" id="boardTitle" name="boardTitle">
+		</div>
+		<div>
+			내용 :
+			<textarea rows="5" cols="80" id="boardTitle" name="boardTitle"> </textarea>
+		</div>
+		<div>
+			<input type="hidden" id="memberId" name="memberId" th:value="${memberId}">
+		</div>
+		<div>
+			<button type="button" id="boardBtn">입력</button>
+		</div>
+	</form>
 </div>	
 </div>	
 </body>

@@ -15,6 +15,12 @@ public class BoardService {
 	@Autowired 
 	private BoardMapper boardMapper;
 	
+	
+	//게시글 추가
+	public int addBoard(Board board) {
+		return boardMapper.insertBoard(board);
+	}
+	
 	//게시판 상세 출력
 	public Board getBoardOne(int boardNo) {
 		return boardMapper.selectBoardOne(boardNo);

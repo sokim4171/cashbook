@@ -31,9 +31,23 @@ public class BoardController {
 		return "redirect:/boardListDetail";
 	}
 	
+	//게시글 추가
+	@GetMapping("/addBoard")
+	public String addBoard(HttpSession session,Model model ) {
+		
+		String memberId=((LoginMember)session.getAttribute("loginMember")).getMemberId();
+		model.addAttribute("memberId", memberId);
+		
+		return "addBoard";
+	}
+	@PostMapping("/addBoard")
+	public String addBoard(HttpSession session,Board board) {
+		
+		boardService.addBoard(board);
+		return "boardList";
+	}
 	
-	
-	
+	//게시글 상세보기
 	@GetMapping("/boardListDetail")
 	public String boardListDetail(Model model,HttpSession session,
 			@RequestParam("boardNo") int boardNo) {
@@ -46,6 +60,8 @@ public class BoardController {
 		return "boardListDetail";
 	}
 	
+	
+	//게시글 리스트 보기
 	@GetMapping("/boardList")
 	public String boardList(Model model,HttpSession session) {
 		//로그인 안했을때 
