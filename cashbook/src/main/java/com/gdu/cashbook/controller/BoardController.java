@@ -25,8 +25,19 @@ public class BoardController {
 	private CommentService commentService;
 	
 	@GetMapping("/addComment")
-	public String addComment(HttpSession session,Comment comment,
+	public String addComment(HttpSession session,Comment comment, Model model,
 			@RequestParam("boardNo") int boardNo) {
+		//로그인 안했을때 
+		if(session.getAttribute("loginMember")==null){ //로그인 해있으면 못하게 막기 
+			return "redirect:/index";
+		}
+		
+		Board board=boardService.getBoardOne(boardNo);
+		model.addAttribute("board", board);
+		
+		List<Comment> commentList=commentService.getCommentByBoard(boardNo);
+		model.addAttribute("commentList", commentList);
+		
 		commentService.addComment(comment);
 		return "redirect:/boardListDetail";
 	}
@@ -34,6 +45,10 @@ public class BoardController {
 	//게시글 추가
 	@GetMapping("/addBoard")
 	public String addBoard(HttpSession session,Model model ) {
+		//로그인 안했을때 
+		if(session.getAttribute("loginMember")==null){ //로그인 해있으면 못하게 막기 
+			return "redirect:/index";
+		}
 		
 		String memberId=((LoginMember)session.getAttribute("loginMember")).getMemberId();
 		model.addAttribute("memberId", memberId);
@@ -42,15 +57,23 @@ public class BoardController {
 	}
 	@PostMapping("/addBoard")
 	public String addBoard(HttpSession session,Board board) {
-		
+		//로그인 안했을때 
+		if(session.getAttribute("loginMember")==null){ //로그인 해있으면 못하게 막기 
+			return "redirect:/index";
+		}
 		boardService.addBoard(board);
-		return "boardList";
+		return "redirect:/boardList";
 	}
 	
 	//게시글 상세보기
 	@GetMapping("/boardListDetail")
 	public String boardListDetail(Model model,HttpSession session,
 			@RequestParam("boardNo") int boardNo) {
+		//로그인 안했을때 
+		if(session.getAttribute("loginMember")==null){ //로그인 해있으면 못하게 막기 
+			return "redirect:/index";
+		}
+		
 		Board board=boardService.getBoardOne(boardNo);
 		model.addAttribute("board", board);
 		
@@ -65,11 +88,10 @@ public class BoardController {
 	@GetMapping("/boardList")
 	public String boardList(Model model,HttpSession session) {
 		//로그인 안했을때 
-		/*
 		if(session.getAttribute("loginMember")==null){ //로그인 해있으면 못하게 막기 
 			return "redirect:/index";
 		}
-		*/
+		
 		List<Board> boardList=boardService.getBoardList();
 		model.addAttribute("bList", boardList);
 		

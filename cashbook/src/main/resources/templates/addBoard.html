@@ -57,18 +57,18 @@ $(document).ready(function () {
 <div id="aside">
 	<h1>addBoard</h1>
 	<!-- 사이드 메뉴 -->
-	<!-- <div th:include="/include/menu::sidemenu"></div>  -->
+	<div th:include="/include/menu::sidemenu"></div>
 </div>	
 <div id="section">
 	<h1>질문 추가</h1>
-	<form action="@{/addBoard}" method="post" id="boardForm">
+	<form th:action="@{/addBoard}" method="post" id="boardForm">
 		<div>
 			제목 :
 			<input type="text" id="boardTitle" name="boardTitle">
 		</div>
 		<div>
 			내용 :
-			<textarea rows="5" cols="80" id="boardTitle" name="boardTitle"> </textarea>
+			<textarea rows="5" cols="80" id="boardContent" name="boardContent"> </textarea>
 		</div>
 		<div>
 			<input type="hidden" id="memberId" name="memberId" th:value="${memberId}">

@@ -54,7 +54,7 @@ $(document).ready(function () {
 <div id="aside">
 	<h1>boardList</h1>
 	<!-- 사이드 메뉴 -->
-	<!-- <div th:include="/include/menu::sidemenu"></div>  -->
+	<div th:include="/include/menu::sidemenu"></div>
 </div>	
 <div id="section">
 	<h1>질문 게시판</h1>
@@ -65,6 +65,8 @@ $(document).ready(function () {
 			<td>board_title</td>
 			<td>member_id</td>
 			<td>board_date</td>
+			<td>수정</td>
+			<td>삭제</td>
 		</tr>
 		<tr th:each="list :${bList}" >
 			<td th:text="${list.boardNo}"></td>
@@ -75,6 +77,8 @@ $(document).ready(function () {
 			</td>
 			<td th:text="${list.memberId}"></td>
 			<td th:text="${list.boardDate}"></td>
+			<td th:href="@{/modifyBoard}" ></td>
+			<td th:href="@{/modifyBoard}"></td>
 		</tr>
 		
 	</table>

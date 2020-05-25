@@ -69,7 +69,7 @@ body {
 	<div id="body">
 		<div id="aside">
 			<h1>가계부 관리</h1>
-			<!-- <div th:include="/include/menu::sidemenu"></div> -->
+			<div th:include="/include/menu::sidemenu"></div>
 		</div>
 		<div id="section">
 			<h1>게시글 상세</h1>
@@ -95,7 +95,7 @@ body {
 			
 			
 			<!-- 댓글 입력 창  -->
-			<form action="@{/addComment}" method="get" id="commentForm">
+			<form th:action="@{/addComment}" method="get" id="commentForm">
 				<div class="input-group mb-3">
 					<input type="text" class="form-control" id="commentContent" name="commentContent">
 					<!-- 작성자 아이디 넘겨야함 --> 
