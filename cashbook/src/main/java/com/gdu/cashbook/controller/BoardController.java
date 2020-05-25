@@ -24,6 +24,38 @@ public class BoardController {
 	@Autowired
 	private CommentService commentService;
 	
+	//게시글 수정
+	@GetMapping("/modifyBoard")
+	public String modifyBoard(HttpSession session,Model model,@RequestParam("boardNo") int boardNo) {
+		//로그인 안했을때 
+		if(session.getAttribute("loginMember")==null){ //로그인 해있으면 못하게 막기 
+			return "redirect:/index";
+		}
+		Board board=boardService.getBoardOne(boardNo);
+		model.addAttribute("board", board);
+		return "modifyBoard";
+	}
+	//게시글 수정 액션
+	@PostMapping("/modifyBoard")
+	public String modifyBoard(HttpSession session,Model model,Board board) {
+		//로그인 안했을때 
+		if(session.getAttribute("loginMember")==null){ //로그인 해있으면 못하게 막기 
+			return "redirect:/index";
+		}
+		boardService.modifyBoard(board);
+		
+		return "redirect:/boardList";
+	}
+	
+	//게시글 삭제
+	@GetMapping("/removerBoard")
+	public String removerBoard(@RequestParam("boardNo") int boardNo) {
+		boardService.removeBoard(boardNo);
+		return "redirect:/boardList";
+	}
+	
+	
+	//댓글 추가 ---------------------------------->여기 오류남
 	@GetMapping("/addComment")
 	public String addComment(HttpSession session,Comment comment, Model model,
 			@RequestParam("boardNo") int boardNo) {

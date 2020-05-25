@@ -15,6 +15,15 @@ public class BoardService {
 	@Autowired 
 	private BoardMapper boardMapper;
 	
+	//게시글 수정
+	public int modifyBoard(Board board) {
+		return boardMapper.updateBoard(board);
+	}
+	
+	//게시글 삭제
+	public int removeBoard(int boardNo) {
+		return boardMapper.deleteBoard(boardNo);
+	}
 	
 	//게시글 추가
 	public int addBoard(Board board) {

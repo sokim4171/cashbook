@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" style="margin-top: 200px;">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -17,19 +17,28 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="container">
+<div class="card">
+<div align="center">
+	<br>
 	<h1>비밀번호 찾기</h1>
 	<form th:action="@{/findMemberPw}" method="post" id="findPwForm">
+		<br>
 		<div>
 			아이디 :
-			<input type="text" id="memberId" name="memberId">
+			<input type="text" id="memberId" name="memberId" class="form-control" style="width: 500px">
 		</div>
 		<div>
 			이메일 :
-			<input type="text" id="memberEmail" name="memberEmail">
+			<input type="text" id="memberEmail" name="memberEmail" class="form-control" style="width: 500px">
 		</div>
+		<br>
 		<div>
-			<button type="submit">찾기</button>
+			<button type="submit" class="btn btn-outline-primary">찾기</button>
 		</div>
 	</form>
+</div>
+</div>
+</div>	
 </body>
 </html>

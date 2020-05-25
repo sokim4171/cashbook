@@ -21,7 +21,7 @@
         width: 200px;
         height: 3000px;
         position: fixed;
-        background: #CD6876;
+        background: #8EA8DB;
         overflow: hidden;
         float: left;
     }
@@ -77,8 +77,8 @@ $(document).ready(function () {
 			</td>
 			<td th:text="${list.memberId}"></td>
 			<td th:text="${list.boardDate}"></td>
-			<td th:href="@{/modifyBoard}" ></td>
-			<td th:href="@{/modifyBoard}"></td>
+			<td><a th:href="@{/modifyBoard(boardNo=${list.boardNo})}" th:if="${list.MemberId==memberId}">수정</a></td>
+			<td><a th:href="@{/removeBoard(boardNo=${list.boardNo})}" th:if="${list.MemberId==memberId}">삭제</a></td>
 		</tr>
 		
 	</table>

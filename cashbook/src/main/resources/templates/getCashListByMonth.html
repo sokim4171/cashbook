@@ -34,7 +34,7 @@
         width: 200px;
         height: 3000px;
         position: fixed;
-        background: #CD6876;
+        background: #8EA8DB;
         overflow: hidden;
         float: left;
     }
@@ -103,7 +103,8 @@
 		<div th:text="${(i-firstDayOfWeek+1)}>0 ? ${(i-firstDayOfWeek+1)} :'' "></div> <!-- 날짜 -->
 		<div th:each="ds : ${dayAndPriceList} "> <!-- 수입 지출 합 -->
 			<div th:if="${i-firstDayOfWeek+1==ds.day}" >
-				<span th:text="${ds.price}" th:class="${ds.price}>0 ? 'gd-blue' : 'gd-red'"></span>
+				<span th:text="${ds.price}" th:class="${ds.price}>0 ? 'gd-blue' : 'gd-red'">
+				</span>
 			</div>
 		</div>
 	</div>
