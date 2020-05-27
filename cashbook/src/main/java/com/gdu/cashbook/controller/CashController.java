@@ -57,6 +57,7 @@ public class CashController {
 			System.out.println(day.getDayOfMonth() + "<--day.getDayOfMonth()"); // 20
 		}
 
+		
 		// cDay 는 캘린더 형식의 현재 시간
 		// 일별 수입 , 지출 총액
 		String memberId = ((LoginMember) (session.getAttribute("loginMember"))).getMemberId();
@@ -70,6 +71,7 @@ public class CashController {
 		}
 
 		model.addAttribute("dayAndPriceList", dayAndPriceList);
+		model.addAttribute("year", year);
 		model.addAttribute("day", day);
 		model.addAttribute("month", cDay.get(Calendar.MONTH) + 1); // 월
 		model.addAttribute("lastDay", cDay.getActualMaximum(Calendar.DATE)); // 마지막 일

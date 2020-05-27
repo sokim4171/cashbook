@@ -59,7 +59,12 @@ $(document).ready(function () {
 </div>	
 <div id="section">
 	<h1>질문 게시판</h1>
-	<a th:href="@{/addBoard}">질문 입력</a>
+	<div>
+		<a th:href="@{/addBoard}">질문 입력</a>
+		<select>
+			<option>
+		</select>
+	</div>
 	<table class="table">
 		<tr>
 			<td>board_no</td>
@@ -85,9 +90,16 @@ $(document).ready(function () {
 	</table>
 	
 	<div align="center">
-		<a th:href="@{/boardList}" class="btn btn-outline-primary" >이전</a>
-		<a th:href="@{/boardList}" class="btn btn-outline-primary" >다음</a>
+		<ul class="pagination" >
+			<li class="page-item"><a th:if="${currentPage} != 1" th:href="@{/boardList(currentPage=${currentPage-1},boardTitle=${boardTitle})}" >이전</a></li>
+			<li class="page-item"><a th:if="${currentPage} != ${lastPage}" th:href="@{/boardList(currentPage=${currentPage+1},boardTitle=${boardTitle})}">다음</a></li>
+		</ul>
 	</div>
+	<br>
+	<form method="get" action="/boardList" class="d-flex justify-content-center">
+		<input type="text" name="boardTitle" id="boardTitle">
+		<button type="submit" class="btn btn-secondary">검색</button>
+	</form>
 </div>	
 </div>	
 </body>

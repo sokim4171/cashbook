@@ -102,11 +102,19 @@
 	<div 
 		th:class="${index.index%7==0}?'gd-clear gd-left': 'gd-left'" 
 		th:each="i,index : ${#numbers.sequence(1,lastDay+firstDayOfWeek-1)}">
-		<div th:text="${(i-firstDayOfWeek+1)}>0 ? ${(i-firstDayOfWeek+1)} :'' "></div> <!-- 날짜 -->
-		<div th:each="ds : ${dayAndPriceList} "> <!-- 수입 지출 합 -->
+		
+		<!-- 날짜 -->
+		<div th:with="value1=${i-(firstDayOfWeek-1)}>0 ? ${i-(firstDayOfWeek-1)} : ''">
+          <a  th:href="@{/getCashListByDate(day=${year+'-'+#numbers.formatInteger(month,2)+'-'+#numbers.formatInteger(value1,2)})}" th:text="${value1}" style="color: black"></a>
+       </div>
+		
+		
+		
+		
+		<!-- 수입 지출 합 -->
+		<div th:each="ds : ${dayAndPriceList} "> 
 			<div th:if="${i-firstDayOfWeek+1==ds.day}" >
-				<span th:text="${ds.price}" th:class="${ds.price}>0 ? 'gd-blue' : 'gd-red'">
-				</span>
+				<span th:text="${ds.price}" th:class="${ds.price}>0 ? 'gd-blue' : 'gd-red'"></span>
 			</div>
 		</div>
 	</div>

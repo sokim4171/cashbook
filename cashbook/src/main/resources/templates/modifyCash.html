@@ -98,9 +98,11 @@
 				<td>카테고리</td>
 				<td>
 					<select id="categoryName" name="categoryName" > 
-						<option value="">::선택하세요::</option>
-						<option th:each="list :${categoryList}" th:text="${list.categoryName}"
-						th:value="${list.categoryName}" ></option>
+						<option th:value="${cash.categoryName}" th:text="${cash.categoryName}"></option>
+						<option th:each="list :${categoryList}" 
+								th:if="${cash.categoryName!=list.categoryName}"
+								th:text="${list.categoryName}"
+								th:value="${list.categoryName}" ></option>
 					</select>
 					<span id="categoryHelper"></span>
 				</td>
@@ -109,9 +111,9 @@
 				<td>수입/지출</td>
 				<td>
 					<select id="cashKind" name="cashKind" >
-						<option value="">::선택하세요::</option>
-						<option value="수입">수입</option>
-						<option value="지출">지출</option>
+						<option th:value="${cash.cashKind}" th:text="${cash.cashKind}">::선택하세요::</option>
+						<option th:if="${cash.cashKind!='수입'}" value="수입">수입</option>
+						<option th:if="${cash.cashKind!='지출'}" value="지출">지출</option>
 					</select>
 					<span id="kindHelper"></span>
 				</td>

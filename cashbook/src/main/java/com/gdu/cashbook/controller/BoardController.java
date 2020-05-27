@@ -1,6 +1,7 @@
 package com.gdu.cashbook.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -115,14 +116,28 @@ public class BoardController {
 	
 	//게시글 리스트 보기
 	@GetMapping("/boardList")
-	public String boardList(Model model,HttpSession session) {
+	public String boardList(Model model,HttpSession session,
+			@RequestParam(value= "currentPage", defaultValue = "1") int currentPage ,
+			@RequestParam(value= "boardTitle", defaultValue = "") String boardTitle) {
 		//로그인 안했을때 
 		if(session.getAttribute("loginMember")==null){ //로그인 해있으면 못하게 막기 
 			return "redirect:/index";
 		}
 		
-		List<Board> boardList=boardService.getBoardList();
-		model.addAttribute("bList", boardList);
+		
+		System.out.println(boardTitle +"<-- controller 검색값");
+		System.out.println(currentPage +"<---controller currentPage");
+		int rowPerPage = 3;
+		int beginRow = (currentPage-1)*rowPerPage;
+		System.out.println(beginRow);
+
+		Map<String, Object> map = boardService.getBoardList(beginRow, rowPerPage, boardTitle);
+
+		model.addAttribute("bList", map.get("list"));
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("boardTitle", boardTitle);
+		
 		
 		String memberId=((LoginMember)session.getAttribute("loginMember")).getMemberId();
 		model.addAttribute("memberId", memberId);
