@@ -28,7 +28,7 @@ public class MemberService {
 	private MemberidMapper memberidMapper;
 	@Autowired
 	private JavaMailSender javaMailSender;
-	@Value("D:\\git-cashbook\\cashbook\\src\\main\\resources\\static\\upload\\")
+	@Value("D:\\spring\\maven.1590454619504\\cashbook\\src\\main\\resources\\static\\upload")
 	private String path;
 	
 	//비밀번호 변경

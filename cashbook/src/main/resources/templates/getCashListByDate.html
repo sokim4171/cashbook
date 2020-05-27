@@ -42,6 +42,7 @@
     #section {
         margin-left: 300px;
         background: white;
+        margin-right: 100px;
     }
 </style> 
 </head>
@@ -49,17 +50,19 @@
 <body>
 <div id="body">
 <div id="aside">
-	<h1>getCashListByDate</h1>
+	<h1>cashbook</h1>
 	<div th:include="/include/menu::sidemenu"></div>
 </div>	
 <div id="section">
-	<h1>가계부</h1>
+	<h1>일별 가계부</h1>
 	
 
 	<h1 class="text-center" th:text="${day}"></h1>
-    <div>
-       <a th:href="@{/getCashListByDate(day = ${day.plusDays(-1)})}">이전</a>
-       <a th:href="@{/getCashListByDate(day = ${day.plusDays(+1)})}">다음</a>
+	
+	
+    <div class="clearfix">
+       <a th:href="@{/getCashListByDate(day = ${day.plusDays(-1)})}" class="float-left btn btn-outline-primary">이전</a>
+       <a th:href="@{/getCashListByDate(day = ${day.plusDays(+1)})}" class="float-right btn btn-outline-primary">다음</a>
     </div>
 	
 	<table class="table table-bordered">
@@ -97,10 +100,12 @@
 		</tbody>
 	</table>
 	
-	
-	<a th:href="@{/addCash(day=${day})}" class="btn btn-primary">입력</a>
-	
-	<h5 th:text="'합계  : ' +${cashKindSum}"></h5>
+	<div align="center">
+	<a th:href="@{/addCash(day=${day})}" class="btn btn-outline-primary">입력</a>
+	</div>
+	<div align="right">
+		<h5 th:text="'합계  : ' +${cashKindSum}"></h5>
+	</div>
 	
 </div>	
 	

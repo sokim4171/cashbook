@@ -29,6 +29,7 @@
     #section {
         margin-left: 300px;
         background: white;
+        margin-right: 100px;
     }
 </style>
 <title>Insert title here</title>
@@ -52,7 +53,7 @@ $(document).ready(function () {
 <body>
 <div id="body">
 <div id="aside">
-	<h1>boardList</h1>
+	<h1>cashbook</h1>
 	<!-- 사이드 메뉴 -->
 	<div th:include="/include/menu::sidemenu"></div>
 </div>	
@@ -83,9 +84,9 @@ $(document).ready(function () {
 		
 	</table>
 	
-	<div>
-		<a th:href="@{/boardList}" class="btn btn-outline-dange">이전</a>
-		<a th:href="@{/boardList}" class="btn btn-outline-dange">다음</a>
+	<div align="center">
+		<a th:href="@{/boardList}" class="btn btn-outline-primary" >이전</a>
+		<a th:href="@{/boardList}" class="btn btn-outline-primary" >다음</a>
 	</div>
 </div>	
 </div>	

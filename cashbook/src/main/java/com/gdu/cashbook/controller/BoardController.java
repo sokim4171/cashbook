@@ -48,30 +48,24 @@ public class BoardController {
 	}
 	
 	//게시글 삭제
-	@GetMapping("/removerBoard")
-	public String removerBoard(@RequestParam("boardNo") int boardNo) {
+	@GetMapping("/removeBoard")
+	public String removeBoard(@RequestParam("boardNo") int boardNo) {
 		boardService.removeBoard(boardNo);
 		return "redirect:/boardList";
 	}
 	
 	
-	//댓글 추가 ---------------------------------->여기 오류남
+	//댓글 추가
 	@GetMapping("/addComment")
-	public String addComment(HttpSession session,Comment comment, Model model,
+	public String addComment(HttpSession session,Comment comment, 
 			@RequestParam("boardNo") int boardNo) {
 		//로그인 안했을때 
 		if(session.getAttribute("loginMember")==null){ //로그인 해있으면 못하게 막기 
 			return "redirect:/index";
 		}
 		
-		Board board=boardService.getBoardOne(boardNo);
-		model.addAttribute("board", board);
-		
-		List<Comment> commentList=commentService.getCommentByBoard(boardNo);
-		model.addAttribute("commentList", commentList);
-		
 		commentService.addComment(comment);
-		return "redirect:/boardListDetail";
+		return "redirect:/boardListDetail?boardNo="+boardNo;
 	}
 	
 	//게시글 추가
@@ -111,6 +105,9 @@ public class BoardController {
 		
 		List<Comment> commentList=commentService.getCommentByBoard(boardNo);
 		model.addAttribute("commentList", commentList);
+		
+		String memberId=((LoginMember)session.getAttribute("loginMember")).getMemberId();
+		model.addAttribute("memberId", memberId);
 		
 		return "boardListDetail";
 	}

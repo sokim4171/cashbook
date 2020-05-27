@@ -6,12 +6,40 @@
 	<!-- 가계부 내용내 카테고리 드롭다운용 -->
 	<select id="selectCashCategoryList" resultType="com.gdu.cashbook.vo.Category">
 		select 
+			category_no categoryNo,
 			category_name categoryName
 		from category
 	</select>
 
-
-
+	<!-- 카테고리 추가 -->
+	<insert id="insertCategory" parameterType="com.gdu.cashbook.vo.Category">
+		insert into category(
+			category_name
+		)
+		values(
+			#{categoryName}
+		)
+	</insert>
 	
+	<!-- 카테고리 수정 -->
+	<update id="updateCategory" parameterType="com.gdu.cashbook.vo.Category">
+		update category
+		set category_name=#{categoryName}
+		where category_no=#{categoryNo}
+	</update>
 	
+	<!-- 하나만 가꼬오기 -->
+	<select id="selectCategoryOne" parameterType="int" resultType="com.gdu.cashbook.vo.Category">
+		select 
+			category_no categoryNo,
+			category_name categoryName
+		from category
+		where category_no=#{categoryNo}
+	</select>
+	
+	<!-- 카테고리 삭제 -->
+	<delete id="deleteCategory" parameterType="com.gdu.cashbook.vo.Category">
+		delete from category
+		where category_name=#{categoryName}
+	</delete>
 </mapper>

@@ -31,6 +31,7 @@
     #section {
         margin-left: 300px;
         background: white;
+        margin-right: 100px;
     }
 </style>
 <!-- Latest compiled and minified CSS -->
@@ -48,14 +49,11 @@
 <body>
 <div id="body">
 <div id="aside">
-	<h1> 회원정보 </h1>
+	<h1> cashbook </h1>
 	<div th:include="/include/menu::sidemenu"></div>
 </div>	
 <div id="section">
-	<div>
-		<a th:href="@{/removeMember}">회원 탈퇴</a>
-		<a th:href="@{/modifyMember}">회원 수정</a>
-	</div>
+	<h1>회원정보</h1>
 	<table class="table">
 		<tr>
 			<td>사진</td>
@@ -84,6 +82,11 @@
 			<td th:text="${member.memberEmail}"></td>
 		</tr>
 	</table>
+	
+	<div align="center">
+		<a th:href="@{/removeMember}" class="btn btn-outline-primary">회원 탈퇴</a>
+		<a th:href="@{/modifyMember}" class="btn btn-outline-primary">회원 수정</a>
+	</div>
 </div>
 </div>
 </body>

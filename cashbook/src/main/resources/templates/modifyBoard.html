@@ -67,20 +67,20 @@ $(document).ready(function () {
 				<td>제목</td>
 				<td>
 					<input type="text" th:value="${board.boardTitle}" 
-					name="boardTitle" id="boardTitle"> 
+					name="boardTitle" id="boardTitle" class="form-control"> 
 				</td>
 			</tr>
 			<tr>
 				<td>내용</td>
 				<td>
 					<textarea rows="5" cols="80" th:text="${board.boardContent}"
-					name="boardContent" id="boardContent"></textarea> 
+					name="boardContent" id="boardContent" class="form-control"></textarea> 
 				</td>
 			</tr>
 			
 		</table>
-		<div>
-			<button type="button" id="boardBtn">입력</button>
+		<div align="center">
+			<button type="button" id="boardBtn" class="btn btn-outline-primary">입력</button>
 		</div>
 	</form>
 </div>	

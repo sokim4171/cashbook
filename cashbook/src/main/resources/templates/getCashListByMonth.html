@@ -42,6 +42,7 @@
     #section {
         margin-left: 300px;
         background: white;
+        margin-right: 100px;
     }
     
     div.gd-left{
@@ -76,18 +77,19 @@
 <body>
 <div id="body">
 <div id="aside">
-	<h2>월별 가계부</h2>
+	<h1>cashbook</h1>
 	<div th:include="/include/menu::sidemenu"></div>
 </div>	
 <div id="section" >
-	<h1>월별 가계부 관리</h1>
+	<h1>월별 가계부</h1>
 	<h3 th:text="${month+'월'}"></h3> <!-- cDay.get(Calendar.MONTH)+1 컨트롤러에서 넘겨줌-->
-	
-	 <div>
-       <a th:href="@{/getCashListByMonth(day = ${day.plusMonths(-1)})}">이전</a>
-       <a th:href="@{/getCashListByMonth(day = ${day.plusMonths(+1)})}">다음</a>
+	<div align="center">
+	 <div class="clearfix">
+       <a th:href="@{/getCashListByMonth(day = ${day.plusMonths(-1)})}" class="float-left btn ">이전</a>
+       <a th:href="@{/getCashListByMonth(day = ${day.plusMonths(+1)})}" class="float-left btn ">다음</a>
     </div>
-	
+	</div>	
+	 
 	
 	<div class="gd-clear gd-left gd-title">일</div>
 	<div class="gd-left gd-title">월</div>
@@ -108,7 +110,7 @@
 			</div>
 		</div>
 	</div>
-		
+	
 </div>
 </div>
 </body>
