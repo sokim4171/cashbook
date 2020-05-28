@@ -127,7 +127,7 @@ public class BoardController {
 		
 		System.out.println(boardTitle +"<-- controller 검색값");
 		System.out.println(currentPage +"<---controller currentPage");
-		int rowPerPage = 3;
+		int rowPerPage = 5;
 		int beginRow = (currentPage-1)*rowPerPage;
 		System.out.println(beginRow);
 

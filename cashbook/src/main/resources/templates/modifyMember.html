@@ -73,38 +73,39 @@ $(document).ready(function () {
 <body>
 <div id="body">
 <div id="aside">
-	<h1>회원 정보 수정</h1>
+	<h1>cashbook</h1>
 	<!-- 사이드 메뉴 -->
 	<div th:include="/include/menu::sidemenu"></div>
 </div>	
 <div id="section">
 	<!-- 회원 정보 수정 테이블 -->
 	<form action="/modifyMember" method="post" id="updateForm">
+		<h1>회원정보 수정</h1>
 		<table class="table">
 			<tr>
 				<td>아이디</td>
-				<td><input type="text" th:value="${member.memberId}" id="memberId" name="memberId" readonly="readonly"></td>
+				<td><input class="form-control" type="text" th:value="${member.memberId}" id="memberId" name="memberId" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td><input type="text" th:value="${member.memberName}" id="memberName" name="memberName"></td>
+				<td><input class="form-control" type="text" th:value="${member.memberName}" id="memberName" name="memberName"></td>
 			</tr>
 			<tr>
 				<td>주소</td>
-				<td><input type="text" th:value="${member.memberAddr}" id="memberAddr" name="memberAddr"></td>
+				<td><input class="form-control" type="text" th:value="${member.memberAddr}" id="memberAddr" name="memberAddr"></td>
 			</tr>
 			<tr>
 				<td>전화번호</td>
-				<td><input type="text" th:value="${member.memberPhone}" id="memberPhone" name="memberPhone"></td>
+				<td><input class="form-control" type="text" th:value="${member.memberPhone}" id="memberPhone" name="memberPhone"></td>
 			</tr>
 			<tr>
 				<td>이메일</td>
-				<td><input type="text" th:value="${member.memberEmail}" id="memberEmail" name="memberEmail"></td>
+				<td><input class="form-control" type="text" th:value="${member.memberEmail}" id="memberEmail" name="memberEmail"></td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
 				<td>
-					<input type="password" id="memberPw" name="memberPw" > 
+					<input class="form-control" type="password" id="memberPw" name="memberPw" > 
 					<span id="pwHelper1"></span>
 				</td>
 				
@@ -112,13 +113,13 @@ $(document).ready(function () {
 			<tr>
 				<td>비빌먼호 확인</td>
 				<td>
-					<input type="password" id="memberPw2" name="memberPw2" >
+					<input class="form-control" type="password" id="memberPw2" name="memberPw2" >
 					<span id="pwHelper2"></span>
 				</td>
 			</tr>
 			
 		</table>
-		<button type="button" id="updateBtn" class="btn">수정</button>
+		<button type="button" id="updateBtn" class="btn btn-outline-primary">수정</button>
 	</form>
 </div>	
 </div>	
