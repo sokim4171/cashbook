@@ -8,12 +8,12 @@
 		select 
 			category_no categoryNo,
 			category_name categoryName
-		from category
+		from cashbook_category
 	</select>
 
 	<!-- 카테고리 추가 -->
 	<insert id="insertCategory" parameterType="com.gdu.cashbook.vo.Category">
-		insert into category(
+		insert into cashbook_category(
 			category_name
 		)
 		values(
@@ -23,7 +23,7 @@
 	
 	<!-- 카테고리 수정 -->
 	<update id="updateCategory" parameterType="com.gdu.cashbook.vo.Category">
-		update category
+		update cashbook_category
 		set category_name=#{categoryName}
 		where category_no=#{categoryNo}
 	</update>
@@ -33,13 +33,13 @@
 		select 
 			category_no categoryNo,
 			category_name categoryName
-		from category
+		from cashbook_category
 		where category_no=#{categoryNo}
 	</select>
 	
 	<!-- 카테고리 삭제 -->
 	<delete id="deleteCategory" parameterType="com.gdu.cashbook.vo.Category">
-		delete from category
+		delete from cashbook_category
 		where category_name=#{categoryName}
 	</delete>
 </mapper>

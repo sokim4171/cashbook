@@ -7,7 +7,7 @@
 
 	<!-- 댓글 추가 -->
 	<insert id="insertComment" parameterType="com.gdu.cashbook.vo.Comment">
-		insert into comment (
+		insert into cashbook_comment (
 			board_no,
 			member_id,
 			comment_content,
@@ -29,7 +29,7 @@
 			member_id memberId,
 			comment_content commentContent,
 			comment_date commentDate
-		from comment
+		from cashbook_comment
 		where board_no=#{boardNo}
 	</select>
 </mapper>
