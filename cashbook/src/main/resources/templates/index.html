@@ -24,7 +24,7 @@
 		<!--  로그인 되어있을 때 -->
 		<div th:if="${session.loginMember!=null}"> ON 
 			<br><br>
-			<div><a href="/logout" class="btn btn-primary col-sm-4">로그아웃</a></div>
+			<div><a href="http://sokim4171.cafe24.com/logout" class="btn btn-primary col-sm-4">로그아웃</a></div>
 			<br><br><br>
 			<br><br><br><br><br>
 		</div>
@@ -32,9 +32,9 @@
 		<!-- 로그인 안되있을 때 -->
 		<div th:if="${session.loginMember==null}"> OFF 
 			<br><br>
-			<div><a href="/login" class="btn btn-primary col-sm-4">로그인</a></div>
+			<div><a href="http://sokim4171.cafe24.com/login" class="btn btn-primary col-sm-4">로그인</a></div>
 			<br>
-			<div><a href="/addMember" class="btn btn-primary col-sm-4">회원가입</a></div>
+			<div><a href="@{/addMember}" class="btn btn-primary col-sm-4">회원가입</a></div>
 			<br><br><br><br><br>
 		</div>
 		
