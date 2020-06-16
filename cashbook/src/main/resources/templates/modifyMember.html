@@ -79,7 +79,7 @@ $(document).ready(function () {
 </div>	
 <div id="section">
 	<!-- 회원 정보 수정 테이블 -->
-	<form action="/modifyMember" method="post" id="updateForm">
+	<form th:action="@{/modifyMember}" method="post" id="updateForm">
 		<h1>회원정보 수정</h1>
 		<table class="table">
 			<tr>

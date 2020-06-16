@@ -88,7 +88,7 @@
 	<h1>회원가입</h1>
 </div>	
 	
-	<form id="idForm" method="post" action="/checkMemberId">
+	<form id="idForm" method="post" th:action="@{/checkMemberId}">
 		<div align="center">
 			아이디 중복 확인 : <input type="text" name="memberIdCheck" id="memberIdCheck">
 			<span id="checkHelper"></span>
@@ -97,7 +97,7 @@
 		</div>
 	</form>
 	
-	<form action="/addMember" method="post" id="myform" enctype="multipart/form-data">
+	<form th:action="@{/addMember}" method="post" id="myform" enctype="multipart/form-data">
 	<div align="center">
 	
 		<div>

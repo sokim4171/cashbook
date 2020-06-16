@@ -60,7 +60,7 @@ $(document).ready(function () {
 	<div th:include="/include/menu::sidemenu"></div>
 </div>
 <div id="section">
-	<form action="/removeMember" method="post" id="removeForm">
+	<form th:action="@{/removeMember}" method="post" id="removeForm">
 		<div>
 			비밀번호 입력 :
 			<input type="text" id="memberPw" name="memberPw" class="form-control">

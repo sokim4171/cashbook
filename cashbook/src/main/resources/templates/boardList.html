@@ -96,7 +96,7 @@ $(document).ready(function () {
 		</ul>
 	</div>
 	<br>
-	<form method="get" action="/boardList" class="d-flex justify-content-center">
+	<form method="get" th:action="@{/boardList}" class="d-flex justify-content-center">
 		<input type="text" name="boardTitle" id="boardTitle">
 		<button type="submit" class="btn btn-secondary">검색</button>
 	</form>

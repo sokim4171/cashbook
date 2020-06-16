@@ -34,7 +34,7 @@ $(document).ready(function () {
 <div class="card">
 <div align="center">
 	<h1>로그인</h1>
-	<form id="loginForm" action="/login" method="post">
+	<form id="loginForm" th:action="@{/login}" method="post">
 		<div>
 			member_id :
 			<input type="text" id="memberId" name="memberId" class="form-control" style="width: 500px">
@@ -49,11 +49,11 @@ $(document).ready(function () {
 		
 		<br>
 		<div>
-			<a href="/findMemberId">아이디가 기억나지 않아요.</a> <!-- 이메일 입력: 이메일에 id보냄 -->
+			<a th:href="@{/findMemberId}">아이디가 기억나지 않아요.</a> <!-- 이메일 입력: 이메일에 id보냄 -->
 		</div>
 		<div>	
 			<!-- 이름, 전화번호, 이메일 : 아이디 -->
-			<a href="/findMemberPw">비밀번호가 기억나지 않아요.</a> <!-- 아이디,이메일 :  이메일로 관리자가 변경한 비밀번호를 보냄  -->
+			<a th:href="@{/findMemberPw}">비밀번호가 기억나지 않아요.</a> <!-- 아이디,이메일 :  이메일로 관리자가 변경한 비밀번호를 보냄  -->
 			<!-- 아이디, 이메일 : 이메일로 관리자가 변경한 비밀번호를 보냄  -->
 		</div>
 		<br>
